@@ -27,20 +27,34 @@ public enum SubjectSeeder {
         }
     }
 
-    /// Wgrywa brakujące przedmioty (raz na instalację) i scala duplikaty, po czym zapisuje.
+    /// Wgrywa brakujące przedmioty (raz na instalację i magazyn) i scala duplikaty, po czym zapisuje.
     ///
     /// Wgrywanie raz na instalację sprawia, że przedmiot usunięty przez użytkowniczkę
-    /// nie wraca przy kolejnym starcie.
+    /// nie wraca przy kolejnym starcie. Flaga jest osobna dla każdego magazynu
+    /// (iCloud, lokalny), żeby uruchomienie w innym trybie nie zostawiło pustej bazy,
+    /// i jest zapisywana dopiero po udanym zapisie.
+    ///
+    /// - Parameter storeKey: identyfikator magazynu, np. `cloud` lub `local`;
+    ///   `nil` (baza w pamięci) wgrywa brakujące przedmioty bez flagi.
     @discardableResult
-    public static func run(in context: ModelContext, defaults: UserDefaults = .standard) throws -> Report {
+    public static func run(
+        in context: ModelContext,
+        defaults: UserDefaults = .standard,
+        storeKey: String? = "cloud"
+    ) throws -> Report {
+        let flagKey = storeKey.map { "\(seededVersionKey).\($0)" }
+        let needsSeed = flagKey.map { defaults.integer(forKey: $0) < seedVersion } ?? true
+
         var report = Report()
-        if defaults.integer(forKey: seededVersionKey) < seedVersion {
+        if needsSeed {
             report.inserted = try insertMissingDefaults(in: context)
-            defaults.set(seedVersion, forKey: seededVersionKey)
         }
         report.merged = try mergeDuplicates(in: context)
         if context.hasChanges {
             try context.save()
+        }
+        if needsSeed, let flagKey {
+            defaults.set(seedVersion, forKey: flagKey)
         }
         return report
     }

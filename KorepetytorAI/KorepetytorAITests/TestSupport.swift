@@ -1,12 +1,30 @@
 import Core
 import Foundation
 import SwiftData
+import Testing
 
 typealias Subject = Core.Subject
 
 /// Liczba rekordów danego typu (otwiera egzystencjalny typ modelu).
 func recordCount<Model: PersistentModel>(of type: Model.Type, in context: ModelContext) throws -> Int {
     try context.fetchCount(FetchDescriptor<Model>())
+}
+
+/// Pierwszy rekord danego typu; brak rekordu kończy test błędem.
+func firstRecord<Model: PersistentModel>(of type: Model.Type, in context: ModelContext) throws -> Model {
+    let records = try context.fetch(FetchDescriptor<Model>())
+    return try #require(records.first, "brak rekordu \(Model.self)")
+}
+
+/// Sprawdza liczbę rekordów danego typu. Wywołanie rzucające jest poza makrem `#expect`.
+func expectCount<Model: PersistentModel>(
+    of type: Model.Type,
+    in context: ModelContext,
+    equals expected: Int,
+    sourceLocation: SourceLocation = #_sourceLocation
+) throws {
+    let count = try recordCount(of: type, in: context)
+    #expect(count == expected, "\(Model.self)", sourceLocation: sourceLocation)
 }
 
 /// Każda z 15 encji wstawiona dokładnie raz i połączona wszystkimi relacjami.

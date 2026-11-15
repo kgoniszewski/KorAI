@@ -40,7 +40,7 @@ struct SubjectSeederTests {
         let second = try SubjectSeeder.run(in: context, defaults: defaults)
 
         #expect(second == SubjectSeeder.Report(inserted: 0, merged: 0))
-        #expect(try subjects().count == 16)
+        try expectSubjectCount(16)
     }
 
     @Test("Nowa instalacja przy istniejących danych nie tworzy duplikatów")
@@ -51,18 +51,19 @@ struct SubjectSeederTests {
         let report = try SubjectSeeder.run(in: context, defaults: freshInstall)
 
         #expect(report.inserted == 0)
-        #expect(try subjects().count == 16)
+        try expectSubjectCount(16)
     }
 
     @Test("Przedmiot usunięty przez użytkowniczkę nie wraca")
     func deletedSubjectIsNotReseeded() throws {
         try SubjectSeeder.run(in: context, defaults: defaults)
-        let edb = try #require(try subjects().first { $0.name == "EDB" })
+        let seeded = try subjects()
+        let edb = try #require(seeded.first { $0.name == "EDB" })
         context.delete(edb)
         try context.save()
 
         try SubjectSeeder.run(in: context, defaults: defaults)
-        #expect(try subjects().count == 15)
+        try expectSubjectCount(15)
     }
 
     @Test("Listy wgrane na dwóch urządzeniach scalają się do 16, zostają starsze rekordy")
@@ -83,7 +84,7 @@ struct SubjectSeederTests {
             copy.createdAt = Date(timeIntervalSince1970: 2_000)
         }
         try context.save()
-        #expect(try subjects().count == 32)
+        try expectSubjectCount(32)
 
         let report = try SubjectSeeder.run(in: context, defaults: defaults)
 
@@ -133,9 +134,45 @@ struct SubjectSeederTests {
         try context.save()
 
         #expect(removed == 1)
-        #expect(try subjects().map(\.id) == [original.id])
-        #expect(assessment.subject?.id == original.id)
-        #expect(material.subject?.id == original.id)
+
+        // Odczyt w nowym kontekście: sprawdza stan zapisany w magazynie.
+        let reader = ModelContext(container)
+        let remainingIDs = try subjects(in: reader).map(\.id)
+        #expect(remainingIDs == [original.id])
+        let storedAssessment = try firstRecord(of: Assessment.self, in: reader)
+        let storedMaterial = try firstRecord(of: StudyMaterial.self, in: reader)
+        #expect(storedAssessment.subject?.id == original.id)
+        #expect(storedMaterial.subject?.id == original.id)
+    }
+
+    @Test("Flaga wgrania jest osobna dla każdego magazynu")
+    func seedFlagIsPerStore() throws {
+        try SubjectSeeder.run(in: context, defaults: defaults, storeKey: "local")
+
+        // Pusty magazyn iCloud na tej samej instalacji nadal dostaje listę.
+        let cloudContainer = try Persistence.makeInMemoryContainer()
+        let cloudContext = ModelContext(cloudContainer)
+        let report = try SubjectSeeder.run(in: cloudContext, defaults: defaults, storeKey: "cloud")
+
+        #expect(report.inserted == 16)
+        let cloudSubjects = try subjects(in: cloudContext)
+        #expect(cloudSubjects.count == 16)
+    }
+
+    @Test("Baza w pamięci zawsze dostaje listę i nie ustawia flagi")
+    func inMemoryStoreSeedsWithoutFlag() throws {
+        let report = try SubjectSeeder.run(in: context, defaults: defaults, storeKey: nil)
+
+        #expect(report.inserted == 16)
+        #expect(defaults.dictionaryRepresentation().keys.allSatisfy { !$0.hasPrefix(SubjectSeeder.seededVersionKey) })
+    }
+
+    private func expectSubjectCount(
+        _ expected: Int,
+        sourceLocation: SourceLocation = #_sourceLocation
+    ) throws {
+        let count = try subjects().count
+        #expect(count == expected, sourceLocation: sourceLocation)
     }
 
     @Test("Nazwy, kolory i ikony z listy startowej są poprawne")
@@ -179,7 +216,8 @@ struct SubjectRepositoryTests {
         #expect(added.sortOrder == 16)
 
         try repository.delete(added)
-        #expect(try repository.allSubjects().count == 16)
+        let afterDelete = try repository.allSubjects()
+        #expect(afterDelete.count == 16)
     }
 }
 

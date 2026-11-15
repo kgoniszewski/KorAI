@@ -15,10 +15,14 @@ Architektura i plan etapów: [`../architektura.md`](../architektura.md).
 1. Skopiuj `Config/Signing.local.xcconfig.example` jako `Config/Signing.local.xcconfig`
    i wpisz własny identyfikator pakietu (`KOR_BUNDLE_ID`) oraz Team ID (`DEVELOPMENT_TEAM`).
    Plik nie trafia do repozytorium. Kontener CloudKit nazywa się wtedy `iCloud.<KOR_BUNDLE_ID>`.
-2. Otwórz `KorepetytorAI.xcodeproj`, wybierz cel **KorepetytorAI** → **Signing & Capabilities**.
-   W sekcji iCloud zaznacz kontener `iCloud.<KOR_BUNDLE_ID>` (przycisk **+**, jeśli jeszcze nie istnieje).
+2. Otwórz `KorepetytorAI.xcodeproj` i w celu **KorepetytorAI** → **Signing & Capabilities** tylko **sprawdź**,
+   że zespół i kontener `iCloud.<KOR_BUNDLE_ID>` są widoczne bez błędów. Jeśli kontenera jeszcze nie ma,
+   utwórz go w [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list/cloudContainer)
+   pod tą samą nazwą. Nie wybieraj zespołu ani kontenera w tym panelu: Xcode zapisałby je na sztywno w pliku projektu
+   i w `Config/KorepetytorAI.entitlements` (zamiast zmiennej `$(CLOUDKIT_CONTAINER_IDENTIFIER)`).
    Uprawnienia iCloud (CloudKit), Push Notifications i Background Modes (Remote notifications)
    są już zapisane w `Config/KorepetytorAI.entitlements` i `Config/Info.plist`.
+   Przy pierwszym otwarciu Xcode może uporządkować `project.pbxproj`; tę zmianę warto zacommitować.
 3. Uruchom aplikację na iPhonie. Na ekranie **Profil** w sekcji „Synchronizacja (test)” powinno być
    „Konto iCloud: Zalogowano” i „Baza danych: iCloud (prywatna baza)”.
 
@@ -44,7 +48,8 @@ Do diagnozy synchronizacji służy wyłączony domyślnie argument `-com.apple.C
 Skrypt buduje aplikację i uruchamia testy (Swift Testing) na pierwszym dostępnym symulatorze
 iPhone'a i iPada. Ostrzeżenia kompilacji traktuje jako błędy (`STRICT=0` to wyłącza).
 Symulatory można wskazać ręcznie zmiennymi `IPHONE_DESTINATION` i `IPAD_DESTINATION`.
-Te same testy uruchamia GitHub Actions (`.github/workflows/ios-tests.yml`).
+Te same testy uruchamia GitHub Actions (`.github/workflows/ios-tests.yml`) przy zmianach na `main` i w pull requestach.
+Testy nie mają aplikacji-hosta, więc działają na symulatorze, a nie na fizycznym urządzeniu.
 
 ## Test odbioru na urządzeniach
 
@@ -85,4 +90,13 @@ scripts/test.sh      testy na symulatorze iPhone'a i iPada
 - **Przedmioty startowe:** wgrywane raz na instalację (usunięty przedmiot nie wraca). Duplikaty z dwóch urządzeń
   scalają się przy starcie, powrocie na pierwszy plan i po zmianach z iCloud; zostaje zawsze najstarszy rekord,
   więc oba urządzenia wybierają ten sam.
-- **Brak iCloud:** aplikacja nie kończy działania, tylko przechodzi na osobną bazę lokalną; tryb jest widoczny na Profilu.
+- **Przedmioty startowe c.d.:** flaga „wgrano” jest osobna dla magazynu iCloud i lokalnego i zapisuje się dopiero po udanym zapisie;
+  baza w pamięci (`-inMemoryStore`) wgrywa listę zawsze.
+- **Brak iCloud:** w wersji Release aplikacja nie kończy działania, tylko przechodzi na osobną bazę lokalną; tryb jest widoczny
+  na Profilu. W wersji Debug błąd CloudKit zatrzymuje aplikację asercją, żeby błąd schematu lub uprawnień był widoczny od razu.
+  Dług: dane z bazy lokalnej nie przechodzą później do iCloud.
+
+## Na później (poza M0)
+
+- `Profile` („jeden na konto iCloud”) może powstać na dwóch urządzeniach przed synchronizacją; potrzebne scalanie jak dla przedmiotów (M1).
+- Przed TestFlight: `PrivacyInfo.xcprivacy` (użycie `UserDefaults`, powód `CA92.1`) — M7.

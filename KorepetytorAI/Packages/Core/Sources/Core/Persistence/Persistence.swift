@@ -56,7 +56,9 @@ public enum Persistence {
     /// Kontener w pamięci, bez CloudKit: testy i podglądy.
     public static func makeInMemoryContainer() throws -> ModelContainer {
         let schema = makeSchema()
+        // Unikalna nazwa: testy tworzą równolegle wiele magazynów w jednym procesie.
         let configuration = ModelConfiguration(
+            UUID().uuidString,
             schema: schema,
             isStoredInMemoryOnly: true,
             cloudKitDatabase: .none
@@ -153,6 +155,11 @@ public enum Persistence {
             return PersistenceSetup(container: container, mode: .cloudKit(containerIdentifier: identifier))
         } catch {
             logger.error("Nie udało się utworzyć bazy z CloudKit: \(String(describing: error), privacy: .public)")
+            #if DEBUG
+            // Zwykle oznacza błąd schematu lub uprawnień; w Debug ma być widoczny od razu w Xcode.
+            // Dług: dane zapisane w trybie lokalnym nie przechodzą później do iCloud.
+            assertionFailure("CloudKit: \(error)")
+            #endif
             return localSetup(reason: .cloudKitUnavailable(message: String(describing: error)))
         }
     }

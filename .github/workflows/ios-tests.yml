@@ -2,6 +2,7 @@ name: Testy iOS
 
 on:
   push:
+    branches: [main]
     paths:
       - "KorepetytorAI/**"
       - ".github/workflows/ios-tests.yml"

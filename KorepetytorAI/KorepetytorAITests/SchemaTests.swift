@@ -72,28 +72,28 @@ struct SchemaTests {
 
         let reader = ModelContext(container)
         for model in SchemaV1.models {
-            #expect(try recordCount(of: model, in: reader) == 1, "\(model)")
+            try expectCount(of: model, in: reader, equals: 1)
         }
 
-        let assessment = try #require(try reader.fetch(FetchDescriptor<Assessment>()).first)
+        let assessment = try firstRecord(of: Assessment.self, in: reader)
         #expect(assessment.kind == .shortQuiz)
         #expect(assessment.scope == "Komórka roślinna")
         #expect(assessment.status == .upcoming)
 
-        let material = try #require(try reader.fetch(FetchDescriptor<StudyMaterial>()).first)
+        let material = try firstRecord(of: StudyMaterial.self, in: reader)
         #expect(material.kind == .pdf)
         #expect(material.fileData == Data([0x25, 0x50, 0x44, 0x46]))
 
-        let card = try #require(try reader.fetch(FetchDescriptor<Flashcard>()).first)
+        let card = try firstRecord(of: Flashcard.self, in: reader)
         #expect(card.easeFactor == 2.5)
         #expect(card.intervalDays == 0)
         #expect(card.repetitions == 0)
 
-        let redemption = try #require(try reader.fetch(FetchDescriptor<RewardRedemption>()).first)
+        let redemption = try firstRecord(of: RewardRedemption.self, in: reader)
         #expect(redemption.status == .requested)
         #expect(redemption.coinCost == 100)
 
-        let profile = try #require(try reader.fetch(FetchDescriptor<Profile>()).first)
+        let profile = try firstRecord(of: Profile.self, in: reader)
         #expect(profile.nickname == "Ola")
         #expect(profile.dayOffTokens == 1)
     }
@@ -106,14 +106,14 @@ struct SchemaTests {
         try writer.save()
 
         let reader = ModelContext(container)
-        let subject = try #require(try reader.fetch(FetchDescriptor<Subject>()).first)
-        let assessment = try #require(try reader.fetch(FetchDescriptor<Assessment>()).first)
-        let material = try #require(try reader.fetch(FetchDescriptor<StudyMaterial>()).first)
-        let deck = try #require(try reader.fetch(FetchDescriptor<FlashcardDeck>()).first)
-        let quiz = try #require(try reader.fetch(FetchDescriptor<Quiz>()).first)
-        let thread = try #require(try reader.fetch(FetchDescriptor<ChatThread>()).first)
-        let profile = try #require(try reader.fetch(FetchDescriptor<Profile>()).first)
-        let reward = try #require(try reader.fetch(FetchDescriptor<Reward>()).first)
+        let subject = try firstRecord(of: Subject.self, in: reader)
+        let assessment = try firstRecord(of: Assessment.self, in: reader)
+        let material = try firstRecord(of: StudyMaterial.self, in: reader)
+        let deck = try firstRecord(of: FlashcardDeck.self, in: reader)
+        let quiz = try firstRecord(of: Quiz.self, in: reader)
+        let thread = try firstRecord(of: ChatThread.self, in: reader)
+        let profile = try firstRecord(of: Profile.self, in: reader)
+        let reward = try firstRecord(of: Reward.self, in: reader)
 
         #expect(subject.assessments.ids == [graph.assessment.id])
         #expect(subject.materials.ids == [graph.material.id])
@@ -148,20 +148,20 @@ struct SchemaTests {
         try context.save()
 
         // Kaskada.
-        #expect(try recordCount(of: Flashcard.self, in: context) == 0)
-        #expect(try recordCount(of: QuizAttempt.self, in: context) == 0)
-        #expect(try recordCount(of: ChatMessage.self, in: context) == 0)
+        try expectCount(of: Flashcard.self, in: context, equals: 0)
+        try expectCount(of: QuizAttempt.self, in: context, equals: 0)
+        try expectCount(of: ChatMessage.self, in: context, equals: 0)
         // Zerowanie: sprawdzian, materiał i historia wymian zostają.
-        #expect(try recordCount(of: Assessment.self, in: context) == 1)
-        #expect(try recordCount(of: StudyMaterial.self, in: context) == 1)
-        #expect(try recordCount(of: RewardRedemption.self, in: context) == 1)
-        let assessment = try #require(try context.fetch(FetchDescriptor<Assessment>()).first)
+        try expectCount(of: Assessment.self, in: context, equals: 1)
+        try expectCount(of: StudyMaterial.self, in: context, equals: 1)
+        try expectCount(of: RewardRedemption.self, in: context, equals: 1)
+        let assessment = try firstRecord(of: Assessment.self, in: context)
         #expect(assessment.subject == nil)
 
         // Sesje planu nauki znikają razem ze sprawdzianem.
         context.delete(assessment)
         try context.save()
-        #expect(try recordCount(of: StudySession.self, in: context) == 0)
+        try expectCount(of: StudySession.self, in: context, equals: 0)
     }
 
     @Test("Typy wyliczeniowe zapisują się jako tekst, z bezpiecznym odczytem")
