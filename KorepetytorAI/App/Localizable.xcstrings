@@ -1,0 +1,490 @@
+{
+  "sourceLanguage": "pl",
+  "strings": {
+    "app.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korepetytor"
+          }
+        }
+      }
+    },
+    "common.error": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coś poszło nie tak"
+          }
+        }
+      }
+    },
+    "common.ok": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "icloud.status.available": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zalogowano"
+          }
+        }
+      }
+    },
+    "icloud.status.checking": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzanie…"
+          }
+        }
+      }
+    },
+    "icloud.status.couldNotDetermine": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się sprawdzić"
+          }
+        }
+      }
+    },
+    "icloud.status.noAccount": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak konta"
+          }
+        }
+      }
+    },
+    "icloud.status.notApplicable": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie dotyczy (baza bez iCloud)"
+          }
+        }
+      }
+    },
+    "icloud.status.restricted": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ograniczone"
+          }
+        }
+      }
+    },
+    "icloud.status.temporarilyUnavailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chwilowo niedostępne"
+          }
+        }
+      }
+    },
+    "materials.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce dodasz tu notatki, zdjęcia z zeszytu i pliki PDF."
+          }
+        }
+      }
+    },
+    "materials.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak materiałów"
+          }
+        }
+      }
+    },
+    "parentZone.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce rodzic zdefiniuje tu nagrody i zatwierdzi wymiany. Dostęp będzie chroniony kodem PIN."
+          }
+        }
+      }
+    },
+    "parentZone.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strefa rodzica"
+          }
+        }
+      }
+    },
+    "planner.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce dodasz tu kartkówki, sprawdziany i prace klasowe."
+          }
+        }
+      }
+    },
+    "planner.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalendarz jest jeszcze pusty"
+          }
+        }
+      }
+    },
+    "profile.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce zobaczysz tu swój poziom, punkty, monety i odznaki."
+          }
+        }
+      }
+    },
+    "profile.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Twój hotel czeka"
+          }
+        }
+      }
+    },
+    "profile.store.cloudKit": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iCloud (prywatna baza)"
+          }
+        }
+      }
+    },
+    "profile.store.inMemory": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tymczasowa (w pamięci)"
+          }
+        }
+      }
+    },
+    "profile.store.localError": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko na urządzeniu: błąd iCloud"
+          }
+        }
+      }
+    },
+    "profile.store.localMissingID": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko na urządzeniu: brak identyfikatora kontenera iCloud"
+          }
+        }
+      }
+    },
+    "profile.subjects.header %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmioty w bazie: %lld"
+          }
+        }
+      }
+    },
+    "profile.sync.addTestSubject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj przedmiot testowy"
+          }
+        }
+      }
+    },
+    "profile.sync.footer": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj przedmiot testowy na jednym urządzeniu i sprawdź, czy po chwili pojawi się na drugim (to samo konto iCloud). Przedmioty testowe usuniesz, przesuwając je w lewo."
+          }
+        }
+      }
+    },
+    "profile.sync.header": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronizacja (test)"
+          }
+        }
+      }
+    },
+    "profile.sync.icloud": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konto iCloud"
+          }
+        }
+      }
+    },
+    "profile.sync.refresh": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź ponownie"
+          }
+        }
+      }
+    },
+    "profile.sync.store": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baza danych"
+          }
+        }
+      }
+    },
+    "profile.sync.testSubjectName %@ %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Test synchronizacji · %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "section.materials": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Materiały"
+          }
+        }
+      }
+    },
+    "section.parentZone": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strefa rodzica"
+          }
+        }
+      }
+    },
+    "section.planner": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planer"
+          }
+        }
+      }
+    },
+    "section.profile": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil"
+          }
+        }
+      }
+    },
+    "section.study": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nauka"
+          }
+        }
+      }
+    },
+    "section.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziś"
+          }
+        }
+      }
+    },
+    "section.tutor": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korepetytor"
+          }
+        }
+      }
+    },
+    "study.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce pojawią się tu quizy, fiszki i streszczenia z Twoich materiałów."
+          }
+        }
+      }
+    },
+    "study.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nauka w krótkich porcjach"
+          }
+        }
+      }
+    },
+    "study.openTutor": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porozmawiaj z korepetytorem"
+          }
+        }
+      }
+    },
+    "today.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce zobaczysz tu najbliższe terminy, zadania na dziś i swoją serię dni."
+          }
+        }
+      }
+    },
+    "today.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu zacznie się Twój dzień"
+          }
+        }
+      }
+    },
+    "tutor.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wkrótce zapytasz tu o wszystko, czego nie rozumiesz w swoich notatkach."
+          }
+        }
+      }
+    },
+    "tutor.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korepetytor jest w drodze"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

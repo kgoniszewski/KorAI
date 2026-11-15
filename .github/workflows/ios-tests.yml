@@ -1,0 +1,44 @@
+name: Testy iOS
+
+on:
+  push:
+    paths:
+      - "KorepetytorAI/**"
+      - ".github/workflows/ios-tests.yml"
+  pull_request:
+    paths:
+      - "KorepetytorAI/**"
+      - ".github/workflows/ios-tests.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ios-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Budowanie i testy (iPhone, iPad)
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Najnowszy stabilny Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Wersja narzędzi
+        run: xcodebuild -version
+
+      - name: Testy jednostkowe
+        working-directory: KorepetytorAI
+        run: ./scripts/test.sh
+
+      - name: Wyniki testów
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: KorepetytorAI/build/
+          if-no-files-found: ignore

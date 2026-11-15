@@ -1,0 +1,3 @@
+// Skopiuj jako Config/Signing.local.xcconfig i wpisz własne wartości.
+KOR_BUNDLE_ID = pl.twojadomena.korepetytorai
+DEVELOPMENT_TEAM = ABCDE12345

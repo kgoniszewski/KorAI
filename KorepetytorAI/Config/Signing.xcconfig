@@ -1,0 +1,16 @@
+// Identyfikatory i podpis aplikacji.
+//
+// Właściciel konta deweloperskiego wpisuje własne wartości w pliku
+// Config/Signing.local.xcconfig (wzór: Signing.local.xcconfig.example).
+// Ten plik nie trafia do repozytorium.
+
+// Identyfikator pakietu aplikacji.
+KOR_BUNDLE_ID = pl.example.korepetytorai
+
+// Identyfikator zespołu (Team ID) z konta Apple Developer.
+DEVELOPMENT_TEAM =
+
+// Kontener CloudKit: iCloud.<identyfikator pakietu>.
+CLOUDKIT_CONTAINER_IDENTIFIER = iCloud.$(KOR_BUNDLE_ID)
+
+#include? "Signing.local.xcconfig"
