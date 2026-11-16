@@ -71,4 +71,64 @@ struct ProfileRepositoryTests {
         #expect(profile.avatarID == "owl")
         #expect(profile.updatedAt > before)
     }
+
+    @Test("Scalanie dwóch profili przenosi xpEvents i badges i usuwa nadmiarowy")
+    func mergeMovesRelationshipsAndRemovesDuplicate() throws {
+        let survivor = try insertProfile(nickname: "iPhone", createdAt: 1_000)
+        let duplicate = try insertProfile(nickname: "iPad", createdAt: 2_000)
+        let survivorEvent = XPEvent(reason: "session", xp: 10)
+        let duplicateEvent = XPEvent(reason: "quiz", xp: 20)
+        let duplicateBadge = Badge(badgeID: "quiz-perfect-first")
+        context.insert(survivorEvent)
+        context.insert(duplicateEvent)
+        context.insert(duplicateBadge)
+        survivorEvent.profile = survivor
+        duplicateEvent.profile = duplicate
+        duplicateBadge.profile = duplicate
+        duplicate.settingsJSON = Data("{}".utf8)
+        try context.save()
+
+        let current = try #require(try repository.currentProfile())
+        #expect(current.id == survivor.id)
+
+        // Odczyt w nowym kontekście: sprawdza stan zapisany w magazynie.
+        let reader = ModelContext(container)
+        let profiles = try reader.fetch(FetchDescriptor<Profile>())
+        #expect(profiles.map(\.id) == [survivor.id])
+        let stored = try #require(profiles.first)
+        #expect(stored.nickname == "iPhone")
+        #expect(stored.xpEvents.ids == [survivorEvent.id, duplicateEvent.id])
+        #expect(stored.badges.ids == [duplicateBadge.id])
+        #expect(stored.settingsJSON == Data("{}".utf8))
+        try expectCount(of: XPEvent.self, in: reader, equals: 2)
+        try expectCount(of: Badge.self, in: reader, equals: 1)
+    }
+
+    @Test("Scalanie jest idempotentne")
+    func mergeIsIdempotent() throws {
+        let survivor = try insertProfile(nickname: "A", createdAt: 1_000)
+        try insertProfile(nickname: "B", createdAt: 2_000)
+        try insertProfile(nickname: "C", createdAt: 3_000)
+
+        #expect(try repository.mergeDuplicates() == 2)
+        try context.save()
+        #expect(try repository.mergeDuplicates() == 0)
+        #expect(!context.hasChanges)
+        #expect(try repository.allProfiles().map(\.id) == [survivor.id])
+    }
+
+    @Test("Wybór zachowanego profilu nie zależy od kolejności (remis createdAt)")
+    func survivorChoiceIsDeterministic() throws {
+        var ids: [UUID] = []
+        for nickname in ["A", "B", "C"] {
+            ids.append(try insertProfile(nickname: nickname, createdAt: 5_000).id)
+        }
+
+        try repository.mergeDuplicates()
+        try context.save()
+
+        let remaining = try repository.allProfiles()
+        #expect(remaining.count == 1)
+        #expect(remaining.first?.id == ids.min { $0.uuidString < $1.uuidString })
+    }
 }

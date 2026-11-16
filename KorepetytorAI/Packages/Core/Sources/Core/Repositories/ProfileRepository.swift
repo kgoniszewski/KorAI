@@ -24,9 +24,49 @@ public struct ProfileRepository {
     }
 
     /// Bieżący profil: najstarszy według `createdAt` (przy remisie najmniejsze `id`).
+    /// Gdy profili jest więcej, scala je i zapisuje.
     /// `nil`, gdy profilu jeszcze nie ma (pierwsze uruchomienie).
+    ///
+    /// Scala i zapisuje dane, więc nie wywołuj go w `body` widoku; widoki czytają profil przez `@Query`.
     public func currentProfile() throws -> Profile? {
-        try allProfiles().first
+        try mergeDuplicates()
+        if context.hasChanges {
+            try context.save()
+        }
+        return try allProfiles().first
+    }
+
+    /// Scala zduplikowane profile. Nie zapisuje.
+    ///
+    /// Dwa urządzenia mogą utworzyć profil, zanim się zsynchronizują. Zostaje najstarszy
+    /// (`createdAt`, przy remisie najmniejsze `id.uuidString`), więc każde urządzenie
+    /// wybiera ten sam rekord niezależnie od kolejności synchronizacji. Wpisy `xpEvents`
+    /// i `badges` usuwanych profili przechodzą do zachowanego, a jego puste
+    /// `settingsJSON` jest uzupełniane z najstarszego duplikatu, który je ma.
+    /// Pseudonim i awatar zostają z zachowanego profilu.
+    ///
+    /// - Returns: liczba usuniętych duplikatów (0 przy ponownym wywołaniu — operacja jest idempotentna).
+    @discardableResult
+    public func mergeDuplicates() throws -> Int {
+        let profiles = try allProfiles()
+        guard let survivor = profiles.first, profiles.count > 1 else { return 0 }
+
+        var removed = 0
+        for duplicate in profiles.dropFirst() {
+            for event in duplicate.xpEvents ?? [] {
+                event.profile = survivor
+            }
+            for badge in duplicate.badges ?? [] {
+                badge.profile = survivor
+            }
+            if survivor.settingsJSON == nil, let settings = duplicate.settingsJSON {
+                survivor.settingsJSON = settings
+            }
+            context.delete(duplicate)
+            removed += 1
+        }
+        survivor.touch()
+        return removed
     }
 
     /// Tworzy profil i zapisuje. Wywołuje go tylko wprowadzenie, gdy `currentProfile()` zwraca `nil`.
