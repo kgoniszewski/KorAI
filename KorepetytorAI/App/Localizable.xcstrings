@@ -111,6 +111,61 @@
         }
       }
     },
+    "assessment.editor.reminder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypomnienie"
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.at %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypomnimy Ci: %@."
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia są wyłączone. Możesz je włączyć w Ustawieniach, a wtedy przypomnienia zaczną przychodzić."
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.openSettings": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia"
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.tooLate": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypominamy dzień wcześniej o 18:00, więc na ten termin przypomnienie już nie zdąży."
+          }
+        }
+      }
+    },
     "assessment.editor.scope": {
       "extractionState": "manual",
       "localizations": {
@@ -894,6 +949,50 @@
           "stringUnit": {
             "state": "translated",
             "value": "Test synchronizacji · %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "reminder.title.classTest": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: praca klasowa"
+          }
+        }
+      }
+    },
+    "reminder.title.other": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: termin"
+          }
+        }
+      }
+    },
+    "reminder.title.shortQuiz": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: kartkówka"
+          }
+        }
+      }
+    },
+    "reminder.title.test": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: sprawdzian"
           }
         }
       }

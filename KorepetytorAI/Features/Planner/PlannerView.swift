@@ -187,6 +187,8 @@ struct PlannerView: View {
     private func markCompleted(_ assessment: Assessment) {
         do {
             try AssessmentRepository(context: modelContext).markCompleted(assessment, grade: assessment.grade)
+            let context = modelContext
+            Task { await ReminderScheduler.sync(context: context) }
         } catch {
             errorText = error.localizedDescription
         }
@@ -195,6 +197,8 @@ struct PlannerView: View {
     private func delete(_ assessment: Assessment) {
         do {
             try AssessmentRepository(context: modelContext).delete(assessment)
+            let context = modelContext
+            Task { await ReminderScheduler.sync(context: context) }
         } catch {
             errorText = error.localizedDescription
         }

@@ -9,7 +9,7 @@ import SwiftUI
 private let logger = Logger(subsystem: "KorepetytorAI", category: "DataMaintenance")
 
 /// Utrzymanie danych w tle: wgranie przedmiotów, scalanie duplikatów przedmiotów
-/// i profili po synchronizacji oraz odświeżanie stanu konta iCloud.
+/// i profili po synchronizacji, przeplanowanie przypomnień oraz odświeżanie stanu konta iCloud.
 struct DataMaintenance: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
@@ -34,15 +34,20 @@ struct DataMaintenance: ViewModifier {
             .task {
                 seedSubjects()
                 mergeDuplicateProfiles()
+                await ReminderScheduler.sync(context: modelContext)
                 await cloudAccount.refresh()
             }
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
                     mergeDuplicates()
+                    // Także po zmianie zgody w Ustawieniach.
+                    Task { await ReminderScheduler.sync(context: modelContext) }
                 }
             }
             .onReceive(Self.remoteChanges) { _ in
+                // Sprawdziany z innego urządzenia: przypomnienia trzeba zaplanować lub usunąć.
                 mergeDuplicates()
+                Task { await ReminderScheduler.sync(context: modelContext) }
             }
             .onReceive(Self.accountChanges) { _ in
                 Task { await cloudAccount.refresh() }

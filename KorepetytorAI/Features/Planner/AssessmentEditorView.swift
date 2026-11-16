@@ -2,6 +2,7 @@ import Core
 import DesignSystem
 import SwiftData
 import SwiftUI
+import UIKit
 
 /// Cel arkusza edytora sprawdzianu.
 enum AssessmentEditorTarget: Identifiable {
@@ -29,6 +30,7 @@ struct AssessmentEditorView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.openURL) private var openURL
 
     @Query(sort: [SortDescriptor(\Subject.sortOrder), SortDescriptor(\Subject.name)])
     private var subjects: [Subject]
@@ -41,6 +43,8 @@ struct AssessmentEditorView: View {
     @State private var scope: String
     @State private var status: AssessmentStatus
     @State private var grade: String
+    @State private var reminderEnabled: Bool
+    @State private var authorization: ReminderScheduler.Authorization?
     @State private var isConfirmingDeletion = false
     @State private var errorText: String?
 
@@ -54,6 +58,7 @@ struct AssessmentEditorView: View {
             _scope = State(initialValue: "")
             _status = State(initialValue: .upcoming)
             _grade = State(initialValue: "")
+            _reminderEnabled = State(initialValue: true)
         case .edit(let assessment):
             self.assessment = assessment
             _subjectID = State(initialValue: assessment.subject?.id)
@@ -62,6 +67,7 @@ struct AssessmentEditorView: View {
             _scope = State(initialValue: assessment.scope)
             _status = State(initialValue: assessment.status)
             _grade = State(initialValue: assessment.grade ?? "")
+            _reminderEnabled = State(initialValue: ReminderPreferences().isEnabled(for: assessment.id))
         }
     }
 
@@ -78,6 +84,10 @@ struct AssessmentEditorView: View {
                     subjectPicker
                     kindPicker
                     DatePicker("assessment.editor.date", selection: $date, displayedComponents: .date)
+                }
+
+                if status == .upcoming {
+                    reminderSection
                 }
 
                 Section("assessment.editor.scope") {
@@ -122,6 +132,15 @@ struct AssessmentEditorView: View {
                 }
             }
             .onAppear(perform: applyDefaultSubject)
+            .task {
+                authorization = await ReminderScheduler.authorization()
+            }
+            .onChange(of: reminderEnabled) { _, isEnabled in
+                // Zgoda przy pierwszym włączeniu przełącznika.
+                if isEnabled, authorization == .notDetermined {
+                    Task { authorization = await ReminderScheduler.requestAuthorization() }
+                }
+            }
             .confirmationDialog("assessment.delete.confirm", isPresented: $isConfirmingDeletion, titleVisibility: .visible) {
                 Button("assessment.delete", role: .destructive, action: delete)
                 Button("common.cancel", role: .cancel) {}
@@ -169,6 +188,40 @@ struct AssessmentEditorView: View {
         }
     }
 
+    /// Przełącznik przypomnienia. Bez zgody na powiadomienia jest wyłączony
+    /// i pokazuje, jak włączyć zgodę w Ustawieniach.
+    private var reminderSection: some View {
+        let isDenied = authorization == .denied
+        let fireDate = ReminderPlanner.reminderDate(assessmentDate: date, status: .upcoming)
+
+        return Section {
+            if isDenied {
+                Toggle("assessment.editor.reminder", systemImage: "bell.fill", isOn: .constant(false))
+                    .disabled(true)
+            } else {
+                Toggle("assessment.editor.reminder", systemImage: "bell.fill", isOn: $reminderEnabled)
+            }
+        } footer: {
+            if isDenied {
+                VStack(alignment: .leading, spacing: Spacing.xs) {
+                    Text("assessment.editor.reminder.denied")
+                    Button("assessment.editor.reminder.openSettings") {
+                        if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                            openURL(url)
+                        }
+                    }
+                    .font(Typography.caption.weight(.semibold))
+                }
+            } else if reminderEnabled {
+                if let fireDate {
+                    Text("assessment.editor.reminder.at \(fireDate.formatted(.dateTime.weekday(.wide).day().month(.wide).hour().minute()))")
+                } else {
+                    Text("assessment.editor.reminder.tooLate")
+                }
+            }
+        }
+    }
+
     // MARK: - Akcje
 
     /// Nowy sprawdzian bez wskazanego przedmiotu dostaje ostatnio użyty (jeśli nadal istnieje).
@@ -183,7 +236,9 @@ struct AssessmentEditorView: View {
         guard let subject = selectedSubject else { return }
         let repository = AssessmentRepository(context: modelContext)
         do {
+            let saved: Assessment
             if let assessment {
+                saved = assessment
                 try repository.update(
                     assessment,
                     subject: subject,
@@ -194,10 +249,21 @@ struct AssessmentEditorView: View {
                     grade: grade
                 )
             } else {
-                try repository.add(subject: subject, kind: kind, date: date, scope: scope)
+                saved = try repository.add(subject: subject, kind: kind, date: date, scope: scope)
             }
             lastSubjectID = subject.id.uuidString
+            ReminderPreferences().setEnabled(reminderEnabled, for: saved.id)
             dismiss()
+            // Zgoda jest potrzebna dopiero przy pierwszym zapisie z włączonym przypomnieniem;
+            // okno systemowe pojawia się po zamknięciu arkusza, więc nie wydłuża wpisu.
+            let needsAuthorization = reminderEnabled && saved.status == .upcoming && authorization == .notDetermined
+            let context = modelContext
+            Task {
+                if needsAuthorization {
+                    await ReminderScheduler.requestAuthorization()
+                }
+                await ReminderScheduler.sync(context: context)
+            }
         } catch {
             errorText = error.localizedDescription
         }
@@ -208,6 +274,8 @@ struct AssessmentEditorView: View {
         do {
             try AssessmentRepository(context: modelContext).delete(assessment)
             dismiss()
+            let context = modelContext
+            Task { await ReminderScheduler.sync(context: context) }
         } catch {
             errorText = error.localizedDescription
         }

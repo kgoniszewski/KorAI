@@ -69,4 +69,89 @@ struct ReminderPlannerTests {
         #expect(ReminderPlanner.assessmentID(fromIdentifier: "other.\(id.uuidString)") == nil)
         #expect(ReminderPlanner.assessmentID(fromIdentifier: "assessment.nie-uuid") == nil)
     }
+
+    private func candidate(
+        _ date: Date,
+        status: AssessmentStatus = .upcoming,
+        enabled: Bool = true,
+        id: UUID = UUID()
+    ) -> ReminderCandidate {
+        ReminderCandidate(
+            assessmentID: id,
+            assessmentDate: date,
+            status: status,
+            kind: .test,
+            subjectName: "Biologia",
+            isEnabled: enabled
+        )
+    }
+
+    @Test("Plan: tylko włączone i przyszłe, od najbliższego")
+    func planFiltersAndSorts() {
+        let now = makeDate(2026, 11, 16, 12)
+        let late = candidate(makeDate(2026, 11, 30))
+        let soon = candidate(makeDate(2026, 11, 18))
+        let candidates = [
+            late,
+            candidate(makeDate(2026, 11, 20), enabled: false),
+            candidate(makeDate(2026, 11, 10)),
+            candidate(makeDate(2026, 11, 21), status: .completed),
+            soon,
+        ]
+
+        let plan = ReminderPlanner.plan(for: candidates, now: now, calendar: warsawCalendar)
+
+        #expect(plan.map(\.assessmentID) == [soon.assessmentID, late.assessmentID])
+        #expect(plan.first?.fireDate == makeDate(2026, 11, 17, 18))
+        #expect(plan.first?.identifier == ReminderPlanner.identifier(for: soon.assessmentID))
+        #expect(plan.first?.subjectName == "Biologia")
+    }
+
+    @Test("Plan: najwyżej limit przypomnień, najbliższe mają pierwszeństwo")
+    func planRespectsLimit() {
+        let now = makeDate(2026, 11, 16, 12)
+        let candidates = (1...70).map { candidate(makeDate(2026, 11, 16).addingTimeInterval(Double($0) * 86_400)) }
+
+        let plan = ReminderPlanner.plan(for: candidates.shuffled(), now: now, calendar: warsawCalendar)
+
+        #expect(plan.count == ReminderPlanner.maxScheduledReminders)
+        #expect(plan.map(\.assessmentID) == candidates.prefix(ReminderPlanner.maxScheduledReminders).map(\.assessmentID))
+    }
+}
+
+@MainActor
+@Suite("Ustawienia przypomnień")
+struct ReminderPreferencesTests {
+    private let preferences: ReminderPreferences
+
+    init() throws {
+        let defaults = try #require(UserDefaults(suiteName: "ReminderPreferencesTests.\(UUID().uuidString)"))
+        preferences = ReminderPreferences(defaults: defaults)
+    }
+
+    @Test("Domyślnie włączone; wyłączenie i ponowne włączenie")
+    func toggle() {
+        let id = UUID()
+        #expect(preferences.isEnabled(for: id))
+
+        preferences.setEnabled(false, for: id)
+        #expect(!preferences.isEnabled(for: id))
+        #expect(preferences.isEnabled(for: UUID()))
+
+        preferences.setEnabled(true, for: id)
+        #expect(preferences.isEnabled(for: id))
+        #expect(preferences.disabledIDs.isEmpty)
+    }
+
+    @Test("Usuwa wpisy nieistniejących sprawdzianów")
+    func removesOrphans() {
+        let kept = UUID()
+        let removed = UUID()
+        preferences.setEnabled(false, for: kept)
+        preferences.setEnabled(false, for: removed)
+
+        preferences.removeEntries(notIn: [kept, UUID()])
+
+        #expect(preferences.disabledIDs == [kept])
+    }
 }
