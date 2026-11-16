@@ -24,8 +24,12 @@ struct PlannerCalendarTests {
     func groupsByDay() {
         let dates = [makeDate(2026, 11, 20, 9), makeDate(2026, 11, 18), makeDate(2026, 11, 20, 15)]
         let groups = PlannerCalendar.groupedByDay(dates, calendar: warsawCalendar) { $0 }
-        #expect(groups.map(\.day) == [makeDate(2026, 11, 18), makeDate(2026, 11, 20)])
-        #expect(groups.map(\.items.count) == [1, 2])
+        let actual: [Date] = groups.map(\.day)
+        let expected: [Date] = [makeDate(2026, 11, 18), makeDate(2026, 11, 20)]
+        #expect(actual == expected)
+        let actual2: [Int] = groups.map(\.items.count)
+        let expected2: [Int] = [1, 2]
+        #expect(actual2 == expected2)
     }
 
     @Test("Siatka listopada 2026: zaczyna się w niedzielę, więc 6 pustych pól")

@@ -124,7 +124,9 @@ struct AssessmentRepositoryTests {
         _ = try repository.add(subject: biology, date: makeDate(2026, 10, 31))
 
         let november = try repository.assessments(from: makeDate(2026, 11, 1), to: makeDate(2026, 12, 1))
-        #expect(november.map(\.id) == [early.id, late.id])
+        let actual: [UUID] = november.map(\.id)
+        let expected: [UUID] = [early.id, late.id]
+        #expect(actual == expected)
 
         let all = try repository.assessments()
         #expect(all.count == 4)
@@ -138,7 +140,9 @@ struct AssessmentRepositoryTests {
         let bio2 = try repository.add(subject: biology, date: makeDate(2026, 11, 12))
 
         let result = try repository.assessments(subject: biology)
-        #expect(result.map(\.id) == [bio1.id, bio2.id])
+        let actual: [UUID] = result.map(\.id)
+        let expected: [UUID] = [bio1.id, bio2.id]
+        #expect(actual == expected)
     }
 
     @Test("Nadchodzące: tylko status upcoming od dziś, posortowane, z limitem")
@@ -156,10 +160,14 @@ struct AssessmentRepositoryTests {
         let fourth = try repository.add(subject: history, date: makeDate(2026, 12, 2))
 
         let all = try repository.upcoming(from: today)
-        #expect(all.map(\.id) == [first.id, second.id, third.id, fourth.id])
+        let actual: [UUID] = all.map(\.id)
+        let expected: [UUID] = [first.id, second.id, third.id, fourth.id]
+        #expect(actual == expected)
 
         let limited = try repository.upcoming(limit: 3, from: today)
-        #expect(limited.map(\.id) == [first.id, second.id, third.id])
+        let actual2: [UUID] = limited.map(\.id)
+        let expected2: [UUID] = [first.id, second.id, third.id]
+        #expect(actual2 == expected2)
 
         let everything = try repository.allUpcoming()
         #expect(everything.count == 5, "z wczorajszym, bez odwołanego")

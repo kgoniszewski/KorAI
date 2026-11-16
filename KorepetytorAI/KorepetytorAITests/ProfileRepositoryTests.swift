@@ -94,11 +94,17 @@ struct ProfileRepositoryTests {
         // Odczyt w nowym kontekście: sprawdza stan zapisany w magazynie.
         let reader = ModelContext(container)
         let profiles = try reader.fetch(FetchDescriptor<Profile>())
-        #expect(profiles.map(\.id) == [survivor.id])
+        let actual: [UUID] = profiles.map(\.id)
+        let expected: [UUID] = [survivor.id]
+        #expect(actual == expected)
         let stored = try #require(profiles.first)
         #expect(stored.nickname == "iPhone")
-        #expect(stored.xpEvents.ids == [survivorEvent.id, duplicateEvent.id])
-        #expect(stored.badges.ids == [duplicateBadge.id])
+        let actual2: Set<UUID> = stored.xpEvents.ids
+        let expected2: Set<UUID> = [survivorEvent.id, duplicateEvent.id]
+        #expect(actual2 == expected2)
+        let actual3: Set<UUID> = stored.badges.ids
+        let expected3: Set<UUID> = [duplicateBadge.id]
+        #expect(actual3 == expected3)
         #expect(stored.settingsJSON == Data("{}".utf8))
         try expectCount(of: XPEvent.self, in: reader, equals: 2)
         try expectCount(of: Badge.self, in: reader, equals: 1)
@@ -114,7 +120,9 @@ struct ProfileRepositoryTests {
         try context.save()
         #expect(try repository.mergeDuplicates() == 0)
         #expect(!context.hasChanges)
-        #expect(try repository.allProfiles().map(\.id) == [survivor.id])
+        let actual: [UUID] = try repository.allProfiles().map(\.id)
+        let expected: [UUID] = [survivor.id]
+        #expect(actual == expected)
     }
 
     @Test("Wybór zachowanego profilu nie zależy od kolejności (remis createdAt)")

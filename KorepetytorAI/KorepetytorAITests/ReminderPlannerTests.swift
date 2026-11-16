@@ -101,7 +101,9 @@ struct ReminderPlannerTests {
 
         let plan = ReminderPlanner.plan(for: candidates, now: now, calendar: warsawCalendar)
 
-        #expect(plan.map(\.assessmentID) == [soon.assessmentID, late.assessmentID])
+        let actual: [UUID] = plan.map(\.assessmentID)
+        let expected: [UUID] = [soon.assessmentID, late.assessmentID]
+        #expect(actual == expected)
         #expect(plan.first?.fireDate == makeDate(2026, 11, 17, 18))
         #expect(plan.first?.identifier == ReminderPlanner.identifier(for: soon.assessmentID))
         #expect(plan.first?.subjectName == "Biologia")
@@ -152,6 +154,8 @@ struct ReminderPreferencesTests {
 
         preferences.removeEntries(notIn: [kept, UUID()])
 
-        #expect(preferences.disabledIDs == [kept])
+        let actual: Set<UUID> = preferences.disabledIDs
+        let expected: Set<UUID> = [kept]
+        #expect(actual == expected)
     }
 }
