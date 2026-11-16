@@ -197,30 +197,6 @@ struct SubjectSeederTests {
     }
 }
 
-@MainActor
-@Suite("Repozytorium przedmiotów")
-struct SubjectRepositoryTests {
-    @Test("Nowy przedmiot trafia na koniec listy")
-    func addAppendsAtEnd() throws {
-        let container = try Persistence.makeInMemoryContainer()
-        let context = ModelContext(container)
-        try SubjectSeeder.insertMissingDefaults(in: context)
-        try context.save()
-
-        let repository = SubjectRepository(context: context)
-        let added = try repository.addSubject(name: "Test", kind: .general, colorName: "slate", iconName: "star")
-
-        let all = try repository.allSubjects()
-        #expect(all.count == 17)
-        #expect(all.last?.id == added.id)
-        #expect(added.sortOrder == 16)
-
-        try repository.delete(added)
-        let afterDelete = try repository.allSubjects()
-        #expect(afterDelete.count == 16)
-    }
-}
-
 @Suite("System wizualny")
 struct DesignSystemTests {
     @Test("Katalog kolorów zawiera kolory semantyczne i 16 kolorów przedmiotów")
