@@ -12,6 +12,17 @@
         }
       }
     },
+    "common.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj"
+          }
+        }
+      }
+    },
     "common.error": {
       "extractionState": "manual",
       "localizations": {
@@ -30,6 +41,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        }
+      }
+    },
+    "common.save": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz"
           }
         }
       }
@@ -437,6 +459,307 @@
           "stringUnit": {
             "state": "translated",
             "value": "Porozmawiaj z korepetytorem"
+          }
+        }
+      }
+    },
+    "subjects.add": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj przedmiot"
+          }
+        }
+      }
+    },
+    "subjects.assessmentCount %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld termin"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminy"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminów"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subjects.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń"
+          }
+        }
+      }
+    },
+    "subjects.delete.blocked.message %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld termin w Planerze. Najpierw usuń go albo zmień w nim przedmiot."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminy w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminów w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminu w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subjects.delete.blocked.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie można usunąć przedmiotu „%@”"
+          }
+        }
+      }
+    },
+    "subjects.delete.confirm.action": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń przedmiot"
+          }
+        }
+      }
+    },
+    "subjects.delete.confirm.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć przedmiot „%@”?"
+          }
+        }
+      }
+    },
+    "subjects.editor.color": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolor"
+          }
+        }
+      }
+    },
+    "subjects.editor.colorOption %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolor %@"
+          }
+        }
+      }
+    },
+    "subjects.editor.editTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edycja przedmiotu"
+          }
+        }
+      }
+    },
+    "subjects.editor.icon": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona"
+          }
+        }
+      }
+    },
+    "subjects.editor.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa"
+          }
+        }
+      }
+    },
+    "subjects.editor.nameCounter %lld %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld znaków"
+          }
+        }
+      }
+    },
+    "subjects.editor.namePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa przedmiotu"
+          }
+        }
+      }
+    },
+    "subjects.editor.newTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy przedmiot"
+          }
+        }
+      }
+    },
+    "subjects.editor.preview": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podgląd"
+          }
+        }
+      }
+    },
+    "subjects.error.duplicateName": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmiot o tej nazwie już jest na liście."
+          }
+        }
+      }
+    },
+    "subjects.error.emptyName": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz nazwę przedmiotu."
+          }
+        }
+      }
+    },
+    "subjects.error.nameTooLong %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa może mieć najwyżej %lld znaków."
+          }
+        }
+      }
+    },
+    "subjects.error.saveFailed": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać przedmiotu. Spróbuj ponownie."
+          }
+        }
+      }
+    },
+    "subjects.section.general": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogólne"
+          }
+        }
+      }
+    },
+    "subjects.section.vocational": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zawodowe"
+          }
+        }
+      }
+    },
+    "subjects.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmioty"
           }
         }
       }

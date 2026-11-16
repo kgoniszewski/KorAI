@@ -1,7 +1,7 @@
 import DesignSystem
 import SwiftUI
 
-/// Planer. W M0 ekran zastępczy; kalendarz powstaje w M1.
+/// Planer. Kalendarz powstaje w kolejnych krokach M1; na razie wejście do listy przedmiotów.
 struct PlannerView: View {
     var body: some View {
         ScreenContainer(title: "section.planner") {
@@ -12,9 +12,19 @@ struct PlannerView: View {
                 tint: SubjectPalette.sky.color
             )
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink {
+                    SubjectListView()
+                } label: {
+                    Label("subjects.title", systemImage: "books.vertical.fill")
+                }
+            }
+        }
     }
 }
 
 #Preview {
     NavigationStack { PlannerView() }
+        .modelContainer(PreviewSupport.container)
 }
