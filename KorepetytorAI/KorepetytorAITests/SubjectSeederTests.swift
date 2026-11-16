@@ -211,6 +211,25 @@ struct DesignSystemTests {
         }
     }
 
+    @Test("Ikony przedmiotów i awatary istnieją w SF Symbols")
+    func symbolsExist() {
+        for icon in SubjectIcons.all {
+            #expect(UIImage(systemName: icon) != nil, "brak symbolu \(icon)")
+        }
+        #expect(Set(SubjectIcons.all).count == SubjectIcons.all.count, "powtórzona ikona")
+        #expect(SubjectIcons.all.contains(SubjectIcons.defaultIcon))
+        for seed in SubjectCatalog.defaultSubjects {
+            #expect(SubjectIcons.all.contains(seed.iconName), "brak ikony \(seed.iconName) na liście wyboru")
+        }
+
+        #expect(AvatarID.allCases.count == 8)
+        for avatar in AvatarID.allCases {
+            #expect(UIImage(systemName: avatar.systemImage) != nil, "brak symbolu \(avatar.systemImage)")
+        }
+        #expect(Set(AvatarID.allCases.map(\.palette)).count == 8, "każdy awatar ma inny kolor")
+        #expect(AvatarID.resolve("nieznany") == .fallback)
+    }
+
     @Test("Kolory mają osobny wariant ciemny")
     func colorsHaveDarkVariants() throws {
         let bundle = DesignSystemResources.bundle

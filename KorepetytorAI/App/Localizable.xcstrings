@@ -320,6 +320,94 @@
         }
       }
     },
+    "avatar.bird": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ptak"
+          }
+        }
+      }
+    },
+    "avatar.cat": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kot"
+          }
+        }
+      }
+    },
+    "avatar.dog": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pies"
+          }
+        }
+      }
+    },
+    "avatar.fish": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ryba"
+          }
+        }
+      }
+    },
+    "avatar.hare": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zając"
+          }
+        }
+      }
+    },
+    "avatar.ladybug": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biedronka"
+          }
+        }
+      }
+    },
+    "avatar.lizard": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaszczurka"
+          }
+        }
+      }
+    },
+    "avatar.tortoise": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Żółw"
+          }
+        }
+      }
+    },
     "common.cancel": {
       "extractionState": "manual",
       "localizations": {
@@ -566,6 +654,116 @@
         }
       }
     },
+    "onboarding.avatar.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten zwierzak będzie Ci towarzyszyć w nauce."
+          }
+        }
+      }
+    },
+    "onboarding.avatar.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz awatar, %@"
+          }
+        }
+      }
+    },
+    "onboarding.back": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstecz"
+          }
+        }
+      }
+    },
+    "onboarding.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe"
+          }
+        }
+      }
+    },
+    "onboarding.done.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko gotowe. Dodaj pierwszy termin, a przypomnimy Ci o nim dzień wcześniej."
+          }
+        }
+      }
+    },
+    "onboarding.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalej"
+          }
+        }
+      }
+    },
+    "onboarding.nickname.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz pseudonim. Zobaczysz go na ekranie Dziś i w profilu. Możesz go później zmienić."
+          }
+        }
+      }
+    },
+    "onboarding.nickname.placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pseudonim"
+          }
+        }
+      }
+    },
+    "onboarding.nickname.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cześć! Jak mamy Cię nazywać?"
+          }
+        }
+      }
+    },
+    "onboarding.progress %lld %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Krok %1$lld z %2$lld"
+          }
+        }
+      }
+    },
     "parentZone.empty.message": {
       "extractionState": "manual",
       "localizations": {
@@ -799,24 +997,35 @@
         }
       }
     },
-    "profile.empty.message": {
+    "profile.edit": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce zobaczysz tu swój poziom, punkty, monety i odznaki."
+            "value": "Zmień pseudonim i awatar"
           }
         }
       }
     },
-    "profile.empty.title": {
+    "profile.editor.avatar": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Twój hotel czeka"
+            "value": "Awatar"
+          }
+        }
+      }
+    },
+    "profile.editor.nickname": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pseudonim"
           }
         }
       }
@@ -865,35 +1074,13 @@
         }
       }
     },
-    "profile.subjects.header %lld": {
-      "extractionState": "manual",
-      "localizations": {
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Przedmioty w bazie: %lld"
-          }
-        }
-      }
-    },
-    "profile.sync.addTestSubject": {
-      "extractionState": "manual",
-      "localizations": {
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dodaj przedmiot testowy"
-          }
-        }
-      }
-    },
     "profile.sync.footer": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dodaj przedmiot testowy na jednym urządzeniu i sprawdź, czy po chwili pojawi się na drugim (to samo konto iCloud). Przedmioty testowe usuniesz, przesuwając je w lewo."
+            "value": "Dane synchronizują się przez iCloud między urządzeniami zalogowanymi na to samo konto."
           }
         }
       }
@@ -904,7 +1091,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Synchronizacja (test)"
+            "value": "iCloud"
           }
         }
       }
@@ -938,17 +1125,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Baza danych"
-          }
-        }
-      }
-    },
-    "profile.sync.testSubjectName %@ %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Test synchronizacji · %1$@ · %2$@"
           }
         }
       }

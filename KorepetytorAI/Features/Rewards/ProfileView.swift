@@ -2,32 +2,40 @@ import Core
 import DesignSystem
 import SwiftData
 import SwiftUI
-import UIKit
 
-/// Profil (moduł „Nagrody i profil”). W M0: ekran zastępczy, stan iCloud
-/// i lista przedmiotów z bazy do testu synchronizacji. Wejście do Strefy rodzica.
+/// Profil (moduł „Nagrody i profil”). W M1: pseudonim, awatar i stan iCloud;
+/// wejście do Strefy rodzica. Punkty, monety i odznaki dochodzą w M3.
+///
+/// Profil nie powstaje tutaj: tworzy go tylko wprowadzenie.
 struct ProfileView: View {
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.storeMode) private var storeMode
     @Environment(CloudAccountMonitor.self) private var cloudAccount
 
-    @Query(sort: [SortDescriptor(\Subject.sortOrder), SortDescriptor(\Subject.name)])
-    private var subjects: [Subject]
+    @Query(sort: [SortDescriptor(\Profile.createdAt)])
+    private var profiles: [Profile]
 
-    @State private var isShowingError = false
-    @State private var errorText = ""
+    @State private var isEditing = false
 
     var body: some View {
         List {
-            Section {
-                EmptyState(
-                    "profile.empty.title",
-                    message: "profile.empty.message",
-                    systemImage: "star.circle.fill",
-                    tint: SubjectPalette.magenta.color
-                )
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
+            if let profile = profiles.first {
+                Section {
+                    VStack(spacing: Spacing.m) {
+                        AvatarView(avatarID: profile.avatarID, size: 96)
+                        Text(verbatim: profile.nickname)
+                            .font(Typography.display)
+                            .foregroundStyle(Palette.textPrimary)
+                            .multilineTextAlignment(.center)
+                        Button("profile.edit", systemImage: "pencil") {
+                            isEditing = true
+                        }
+                        .font(Typography.callout.weight(.semibold))
+                        .buttonStyle(.borderless)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, Spacing.l)
+                    .listRowBackground(Color.clear)
+                }
             }
 
             Section {
@@ -42,7 +50,6 @@ struct ProfileView: View {
                         .font(Typography.caption)
                         .foregroundStyle(Palette.textSecondary)
                 }
-                Button("profile.sync.addTestSubject", systemImage: "plus.circle.fill", action: addTestSubject)
                 Button("profile.sync.refresh", systemImage: "arrow.clockwise") {
                     Task { await cloudAccount.refresh() }
                 }
@@ -50,17 +57,6 @@ struct ProfileView: View {
                 Text("profile.sync.header")
             } footer: {
                 Text("profile.sync.footer")
-            }
-
-            Section {
-                ForEach(subjects) { subject in
-                    SubjectChip(name: subject.name, colorName: subject.colorName, iconName: subject.iconName)
-                        .listRowBackground(Palette.surface)
-                        .deleteDisabled(SubjectCatalog.containsDefault(named: subject.name))
-                }
-                .onDelete(perform: deleteSubjects)
-            } header: {
-                Text("profile.subjects.header \(subjects.count)")
             }
 
             Section {
@@ -74,47 +70,81 @@ struct ProfileView: View {
         .scrollContentBackground(.hidden)
         .background(Palette.background)
         .navigationTitle("section.profile")
-        .alert("common.error", isPresented: $isShowingError) {
-            Button("common.ok", role: .cancel) {}
-        } message: {
-            Text(verbatim: errorText)
-        }
-    }
-
-    /// Dodaje przedmiot testowy z nazwą urządzenia i godziną, żeby na drugim
-    /// urządzeniu było widać, skąd przyszedł.
-    private func addTestSubject() {
-        let device = UIDevice.current.userInterfaceIdiom == .pad ? "iPad" : "iPhone"
-        let time = Date.now.formatted(date: .omitted, time: .standard)
-        let name = String(localized: "profile.sync.testSubjectName \(device) \(time)")
-        do {
-            try SubjectRepository(context: modelContext).addSubject(
-                name: name,
-                kind: .general,
-                colorName: SubjectPalette.slate.rawValue,
-                iconName: "arrow.triangle.2.circlepath"
-            )
-        } catch {
-            show(error)
-        }
-    }
-
-    /// Usuwa tylko przedmioty spoza listy startowej (w M0: przedmioty testowe).
-    private func deleteSubjects(at offsets: IndexSet) {
-        let repository = SubjectRepository(context: modelContext)
-        do {
-            for subject in offsets.map({ subjects[$0] })
-            where !SubjectCatalog.containsDefault(named: subject.name) {
-                try repository.delete(subject)
+        .sheet(isPresented: $isEditing) {
+            if let profile = profiles.first {
+                ProfileEditorView(profile: profile)
             }
-        } catch {
-            show(error)
+        }
+    }
+}
+
+/// Zmiana pseudonimu i awatara.
+struct ProfileEditorView: View {
+    let profile: Profile
+
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var nickname: String
+    @State private var avatar: AvatarID
+    @State private var errorText: String?
+
+    init(profile: Profile) {
+        self.profile = profile
+        _nickname = State(initialValue: profile.nickname)
+        _avatar = State(initialValue: AvatarID.resolve(profile.avatarID))
+    }
+
+    private var canSave: Bool {
+        !nickname.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("profile.editor.nickname") {
+                    TextField("onboarding.nickname.placeholder", text: $nickname)
+                        .textContentType(.nickname)
+                        .textInputAutocapitalization(.words)
+                        .onChange(of: nickname) { _, newValue in
+                            if newValue.count > ProfileRepository.maxNicknameLength {
+                                nickname = String(newValue.prefix(ProfileRepository.maxNicknameLength))
+                            }
+                        }
+                }
+                Section("profile.editor.avatar") {
+                    AvatarPicker(selection: $avatar)
+                        .padding(.vertical, Spacing.s)
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .background(Palette.background)
+            .navigationTitle("profile.edit")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("common.cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("common.save", action: save)
+                        .disabled(!canSave)
+                }
+            }
+            .alert("common.error", isPresented: $errorText.isPresent()) {
+                Button("common.ok", role: .cancel) {}
+            } message: {
+                Text(verbatim: errorText ?? "")
+            }
         }
     }
 
-    private func show(_ error: any Error) {
-        errorText = error.localizedDescription
-        isShowingError = true
+    private func save() {
+        do {
+            try ProfileRepository(context: modelContext).update(profile, nickname: nickname, avatarID: avatar.rawValue)
+            dismiss()
+        } catch {
+            errorText = error.localizedDescription
+        }
     }
 }
 

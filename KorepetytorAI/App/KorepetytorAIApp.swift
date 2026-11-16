@@ -24,7 +24,7 @@ struct KorepetytorAIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppShell()
+            RootView()
                 .modifier(DataMaintenance())
                 .environment(cloudAccount)
                 .environment(\.storeMode, persistence.mode)
