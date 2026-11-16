@@ -1584,24 +1584,90 @@
         }
       }
     },
-    "today.empty.message": {
+    "today.addAssessment": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce zobaczysz tu najbliższe terminy, zadania na dziś i swoją serię dni."
+            "value": "Dodaj sprawdzian"
           }
         }
       }
     },
-    "today.empty.title": {
+    "today.greeting %@": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu zacznie się Twój dzień"
+            "value": "Cześć, %@!"
+          }
+        }
+      }
+    },
+    "today.tasks.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W kolejnych wersjach pojawią się tu krótkie zadania przygotowujące do sprawdzianów."
+          }
+        }
+      }
+    },
+    "today.tasks.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan nauki już wkrótce"
+          }
+        }
+      }
+    },
+    "today.tasks.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadania na dziś"
+          }
+        }
+      }
+    },
+    "today.upcoming.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj najbliższą kartkówkę albo sprawdzian, a przypomnimy Ci o nim dzień wcześniej."
+          }
+        }
+      }
+    },
+    "today.upcoming.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic na horyzoncie"
+          }
+        }
+      }
+    },
+    "today.upcoming.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbliższe terminy"
           }
         }
       }
