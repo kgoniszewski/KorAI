@@ -621,6 +621,129 @@
         }
       }
     },
+    "planner.mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widok"
+          }
+        }
+      }
+    },
+    "planner.mode.list": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista"
+          }
+        }
+      }
+    },
+    "planner.mode.month": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.addOnDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj termin na ten dzień"
+          }
+        }
+      }
+    },
+    "planner.month.dayCount %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld termin"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminy"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminów"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "planner.month.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Następny miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.noAssessments": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tego dnia nie ma terminów."
+          }
+        }
+      }
+    },
+    "planner.month.previous": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poprzedni miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziś"
+          }
+        }
+      }
+    },
     "profile.empty.message": {
       "extractionState": "manual",
       "localizations": {

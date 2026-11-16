@@ -3,7 +3,22 @@ import DesignSystem
 import SwiftData
 import SwiftUI
 
-/// Planer: kartkówki, sprawdziany i prace klasowe w widoku listy, z filtrem po przedmiocie.
+/// Tryb Planera.
+enum PlannerMode: String, CaseIterable, Identifiable {
+    case month
+    case list
+
+    var id: String { rawValue }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .month: "planner.mode.month"
+        case .list: "planner.mode.list"
+        }
+    }
+}
+
+/// Planer: kartkówki, sprawdziany i prace klasowe w widoku miesiąca lub listy, z filtrem po przedmiocie.
 struct PlannerView: View {
     @Environment(\.modelContext) private var modelContext
 
@@ -13,6 +28,10 @@ struct PlannerView: View {
     @Query(sort: [SortDescriptor(\Assessment.date), SortDescriptor(\Assessment.createdAt)])
     private var assessments: [Assessment]
 
+    /// Ostatnio wybrany tryb (lokalnie na urządzeniu).
+    @AppStorage("planner.mode") private var mode: PlannerMode = .month
+    @State private var month = PlannerCalendar.startOfMonth(for: .now, calendar: PlannerCalendar.mondayFirst())
+    @State private var selectedDay = Calendar.current.startOfDay(for: .now)
     @State private var subjectFilterID: UUID?
     @State private var editorTarget: AssessmentEditorTarget?
     @State private var pendingDeletion: Assessment?
@@ -30,6 +49,17 @@ struct PlannerView: View {
 
     var body: some View {
         content
+            .safeAreaInset(edge: .top, spacing: 0) {
+                Picker("planner.mode", selection: $mode) {
+                    ForEach(PlannerMode.allCases) { mode in
+                        Text(mode.title).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, Spacing.l)
+                .padding(.vertical, Spacing.s)
+                .background(Palette.background)
+            }
             .background(Palette.background)
             .navigationTitle("section.planner")
             .toolbar { toolbar }
@@ -62,7 +92,17 @@ struct PlannerView: View {
 
     @ViewBuilder
     private var content: some View {
-        if filteredAssessments.isEmpty {
+        if mode == .month {
+            MonthCalendarView(
+                assessments: filteredAssessments,
+                month: $month,
+                selectedDay: $selectedDay,
+                onSelect: { editorTarget = .edit($0) },
+                onComplete: markCompleted,
+                onDelete: { pendingDeletion = $0 },
+                onAdd: { editorTarget = .new(subjectID: subjectFilterID, date: $0) }
+            )
+        } else if filteredAssessments.isEmpty {
             ScrollView {
                 emptyState
                     .padding(Spacing.l)
