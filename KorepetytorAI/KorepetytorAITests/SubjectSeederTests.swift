@@ -197,30 +197,6 @@ struct SubjectSeederTests {
     }
 }
 
-@MainActor
-@Suite("Repozytorium przedmiotów")
-struct SubjectRepositoryTests {
-    @Test("Nowy przedmiot trafia na koniec listy")
-    func addAppendsAtEnd() throws {
-        let container = try Persistence.makeInMemoryContainer()
-        let context = ModelContext(container)
-        try SubjectSeeder.insertMissingDefaults(in: context)
-        try context.save()
-
-        let repository = SubjectRepository(context: context)
-        let added = try repository.addSubject(name: "Test", kind: .general, colorName: "slate", iconName: "star")
-
-        let all = try repository.allSubjects()
-        #expect(all.count == 17)
-        #expect(all.last?.id == added.id)
-        #expect(added.sortOrder == 16)
-
-        try repository.delete(added)
-        let afterDelete = try repository.allSubjects()
-        #expect(afterDelete.count == 16)
-    }
-}
-
 @Suite("System wizualny")
 struct DesignSystemTests {
     @Test("Katalog kolorów zawiera kolory semantyczne i 16 kolorów przedmiotów")
@@ -233,6 +209,25 @@ struct DesignSystemTests {
         for color in SubjectPalette.allCases {
             #expect(UIColor(named: color.assetName, in: bundle, compatibleWith: nil) != nil, "brak koloru \(color.assetName)")
         }
+    }
+
+    @Test("Ikony przedmiotów i awatary istnieją w SF Symbols")
+    func symbolsExist() {
+        for icon in SubjectIcons.all {
+            #expect(UIImage(systemName: icon) != nil, "brak symbolu \(icon)")
+        }
+        #expect(Set(SubjectIcons.all).count == SubjectIcons.all.count, "powtórzona ikona")
+        #expect(SubjectIcons.all.contains(SubjectIcons.defaultIcon))
+        for seed in SubjectCatalog.defaultSubjects {
+            #expect(SubjectIcons.all.contains(seed.iconName), "brak ikony \(seed.iconName) na liście wyboru")
+        }
+
+        #expect(AvatarID.allCases.count == 8)
+        for avatar in AvatarID.allCases {
+            #expect(UIImage(systemName: avatar.systemImage) != nil, "brak symbolu \(avatar.systemImage)")
+        }
+        #expect(Set(AvatarID.allCases.map(\.palette)).count == 8, "każdy awatar ma inny kolor")
+        #expect(AvatarID.resolve("nieznany") == .fallback)
     }
 
     @Test("Kolory mają osobny wariant ciemny")

@@ -12,6 +12,413 @@
         }
       }
     },
+    "assessment.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń"
+          }
+        }
+      }
+    },
+    "assessment.delete.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć ten termin?"
+          }
+        }
+      }
+    },
+    "assessment.editor.chooseSubject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz"
+          }
+        }
+      }
+    },
+    "assessment.editor.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "assessment.editor.editTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edycja terminu"
+          }
+        }
+      }
+    },
+    "assessment.editor.gradeFooter": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocenę możesz wpisać po zakończeniu. Jest tylko dla Ciebie i nic nie zmienia."
+          }
+        }
+      }
+    },
+    "assessment.editor.gradePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocena, np. 4+ (opcjonalnie)"
+          }
+        }
+      }
+    },
+    "assessment.editor.kind": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rodzaj"
+          }
+        }
+      }
+    },
+    "assessment.editor.newTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy termin"
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypomnienie"
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.at %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypomnimy Ci: %@."
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.denied": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia są wyłączone. Możesz je włączyć w Ustawieniach, a wtedy przypomnienia zaczną przychodzić."
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.openSettings": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia"
+          }
+        }
+      }
+    },
+    "assessment.editor.reminder.tooLate": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przypominamy dzień wcześniej o 18:00, więc na ten termin przypomnienie już nie zdąży."
+          }
+        }
+      }
+    },
+    "assessment.editor.scope": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakres (opcjonalnie)"
+          }
+        }
+      }
+    },
+    "assessment.editor.scopePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Np. rozdział 3, komórka roślinna"
+          }
+        }
+      }
+    },
+    "assessment.editor.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stan"
+          }
+        }
+      }
+    },
+    "assessment.editor.subject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmiot"
+          }
+        }
+      }
+    },
+    "assessment.gradeValue %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocena: %@"
+          }
+        }
+      }
+    },
+    "assessment.kind.classTest": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Praca klasowa"
+          }
+        }
+      }
+    },
+    "assessment.kind.other": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inne"
+          }
+        }
+      }
+    },
+    "assessment.kind.shortQuiz": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kartkówka"
+          }
+        }
+      }
+    },
+    "assessment.kind.test": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzian"
+          }
+        }
+      }
+    },
+    "assessment.markCompleted": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ"
+          }
+        }
+      }
+    },
+    "assessment.noSubject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez przedmiotu"
+          }
+        }
+      }
+    },
+    "assessment.status.cancelled": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odwołany"
+          }
+        }
+      }
+    },
+    "assessment.status.completed": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończony"
+          }
+        }
+      }
+    },
+    "assessment.status.upcoming": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nadchodzący"
+          }
+        }
+      }
+    },
+    "avatar.bird": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ptak"
+          }
+        }
+      }
+    },
+    "avatar.cat": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kot"
+          }
+        }
+      }
+    },
+    "avatar.dog": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pies"
+          }
+        }
+      }
+    },
+    "avatar.fish": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ryba"
+          }
+        }
+      }
+    },
+    "avatar.hare": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zając"
+          }
+        }
+      }
+    },
+    "avatar.ladybug": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biedronka"
+          }
+        }
+      }
+    },
+    "avatar.lizard": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaszczurka"
+          }
+        }
+      }
+    },
+    "avatar.tortoise": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Żółw"
+          }
+        }
+      }
+    },
+    "common.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj"
+          }
+        }
+      }
+    },
     "common.error": {
       "extractionState": "manual",
       "localizations": {
@@ -30,6 +437,120 @@
           "stringUnit": {
             "state": "translated",
             "value": "OK"
+          }
+        }
+      }
+    },
+    "common.save": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz"
+          }
+        }
+      }
+    },
+    "countdown.daysAgo %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dzień temu"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dni temu"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dni temu"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dnia temu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "countdown.inDays %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dzień"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dni"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dni"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dnia"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "countdown.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dziś"
+          }
+        }
+      }
+    },
+    "countdown.tomorrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jutro"
+          }
+        }
+      }
+    },
+    "countdown.yesterday": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wczoraj"
           }
         }
       }
@@ -133,6 +654,116 @@
         }
       }
     },
+    "onboarding.avatar.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten zwierzak będzie Ci towarzyszyć w nauce."
+          }
+        }
+      }
+    },
+    "onboarding.avatar.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz awatar, %@"
+          }
+        }
+      }
+    },
+    "onboarding.back": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstecz"
+          }
+        }
+      }
+    },
+    "onboarding.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe"
+          }
+        }
+      }
+    },
+    "onboarding.done.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko gotowe. Dodaj pierwszy termin, a przypomnimy Ci o nim dzień wcześniej."
+          }
+        }
+      }
+    },
+    "onboarding.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalej"
+          }
+        }
+      }
+    },
+    "onboarding.nickname.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz pseudonim. Zobaczysz go na ekranie Dziś i w profilu. Możesz go później zmienić."
+          }
+        }
+      }
+    },
+    "onboarding.nickname.placeholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pseudonim"
+          }
+        }
+      }
+    },
+    "onboarding.nickname.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cześć! Jak mamy Cię nazywać?"
+          }
+        }
+      }
+    },
+    "onboarding.progress %lld %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Krok %1$lld z %2$lld"
+          }
+        }
+      }
+    },
     "parentZone.empty.message": {
       "extractionState": "manual",
       "localizations": {
@@ -155,13 +786,46 @@
         }
       }
     },
+    "planner.addAssessment": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj termin"
+          }
+        }
+      }
+    },
+    "planner.empty.filtered.message %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie ma jeszcze terminów z przedmiotu „%@”."
+          }
+        }
+      }
+    },
+    "planner.empty.filtered.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak terminów"
+          }
+        }
+      }
+    },
     "planner.empty.message": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce dodasz tu kartkówki, sprawdziany i prace klasowe."
+            "value": "Dodaj kartkówkę, sprawdzian albo pracę klasową. Zajmie to kilka sekund."
           }
         }
       }
@@ -177,24 +841,191 @@
         }
       }
     },
-    "profile.empty.message": {
+    "planner.filter": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce zobaczysz tu swój poziom, punkty, monety i odznaki."
+            "value": "Filtr przedmiotu"
           }
         }
       }
     },
-    "profile.empty.title": {
+    "planner.filter.all": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Twój hotel czeka"
+            "value": "Wszystkie przedmioty"
+          }
+        }
+      }
+    },
+    "planner.list.pastHeader %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minione · %@"
+          }
+        }
+      }
+    },
+    "planner.mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widok"
+          }
+        }
+      }
+    },
+    "planner.mode.list": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista"
+          }
+        }
+      }
+    },
+    "planner.mode.month": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.addOnDay": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj termin na ten dzień"
+          }
+        }
+      }
+    },
+    "planner.month.dayCount %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld termin"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminy"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminów"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "planner.month.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Następny miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.noAssessments": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tego dnia nie ma terminów."
+          }
+        }
+      }
+    },
+    "planner.month.previous": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poprzedni miesiąc"
+          }
+        }
+      }
+    },
+    "planner.month.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dziś"
+          }
+        }
+      }
+    },
+    "profile.edit": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmień pseudonim i awatar"
+          }
+        }
+      }
+    },
+    "profile.editor.avatar": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Awatar"
+          }
+        }
+      }
+    },
+    "profile.editor.nickname": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pseudonim"
           }
         }
       }
@@ -243,35 +1074,13 @@
         }
       }
     },
-    "profile.subjects.header %lld": {
-      "extractionState": "manual",
-      "localizations": {
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Przedmioty w bazie: %lld"
-          }
-        }
-      }
-    },
-    "profile.sync.addTestSubject": {
-      "extractionState": "manual",
-      "localizations": {
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dodaj przedmiot testowy"
-          }
-        }
-      }
-    },
     "profile.sync.footer": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dodaj przedmiot testowy na jednym urządzeniu i sprawdź, czy po chwili pojawi się na drugim (to samo konto iCloud). Przedmioty testowe usuniesz, przesuwając je w lewo."
+            "value": "Dane synchronizują się przez iCloud między urządzeniami zalogowanymi na to samo konto."
           }
         }
       }
@@ -282,7 +1091,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Synchronizacja (test)"
+            "value": "iCloud"
           }
         }
       }
@@ -320,13 +1129,46 @@
         }
       }
     },
-    "profile.sync.testSubjectName %@ %@": {
+    "reminder.title.classTest": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Test synchronizacji · %1$@ · %2$@"
+            "value": "Jutro: praca klasowa"
+          }
+        }
+      }
+    },
+    "reminder.title.other": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: termin"
+          }
+        }
+      }
+    },
+    "reminder.title.shortQuiz": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: kartkówka"
+          }
+        }
+      }
+    },
+    "reminder.title.test": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jutro: sprawdzian"
           }
         }
       }
@@ -441,24 +1283,391 @@
         }
       }
     },
-    "today.empty.message": {
+    "subjects.add": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce zobaczysz tu najbliższe terminy, zadania na dziś i swoją serię dni."
+            "value": "Dodaj przedmiot"
           }
         }
       }
     },
-    "today.empty.title": {
+    "subjects.assessmentCount %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld termin"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminy"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminów"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld terminu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subjects.delete": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tu zacznie się Twój dzień"
+            "value": "Usuń"
+          }
+        }
+      }
+    },
+    "subjects.delete.blocked.message %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld termin w Planerze. Najpierw usuń go albo zmień w nim przedmiot."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminy w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminów w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Ten przedmiot ma %lld terminu w Planerze. Najpierw je usuń albo zmień w nich przedmiot."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "subjects.delete.blocked.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie można usunąć przedmiotu „%@”"
+          }
+        }
+      }
+    },
+    "subjects.delete.confirm.action": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń przedmiot"
+          }
+        }
+      }
+    },
+    "subjects.delete.confirm.title %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć przedmiot „%@”?"
+          }
+        }
+      }
+    },
+    "subjects.editor.color": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolor"
+          }
+        }
+      }
+    },
+    "subjects.editor.colorOption %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolor %@"
+          }
+        }
+      }
+    },
+    "subjects.editor.editTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edycja przedmiotu"
+          }
+        }
+      }
+    },
+    "subjects.editor.icon": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona"
+          }
+        }
+      }
+    },
+    "subjects.editor.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa"
+          }
+        }
+      }
+    },
+    "subjects.editor.nameCounter %lld %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld znaków"
+          }
+        }
+      }
+    },
+    "subjects.editor.namePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa przedmiotu"
+          }
+        }
+      }
+    },
+    "subjects.editor.newTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy przedmiot"
+          }
+        }
+      }
+    },
+    "subjects.editor.preview": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podgląd"
+          }
+        }
+      }
+    },
+    "subjects.error.duplicateName": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmiot o tej nazwie już jest na liście."
+          }
+        }
+      }
+    },
+    "subjects.error.emptyName": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz nazwę przedmiotu."
+          }
+        }
+      }
+    },
+    "subjects.error.nameTooLong %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa może mieć najwyżej %lld znaków."
+          }
+        }
+      }
+    },
+    "subjects.error.saveFailed": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać przedmiotu. Spróbuj ponownie."
+          }
+        }
+      }
+    },
+    "subjects.section.general": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogólne"
+          }
+        }
+      }
+    },
+    "subjects.section.vocational": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zawodowe"
+          }
+        }
+      }
+    },
+    "subjects.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmioty"
+          }
+        }
+      }
+    },
+    "today.addAssessment": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj sprawdzian"
+          }
+        }
+      }
+    },
+    "today.greeting %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cześć, %@!"
+          }
+        }
+      }
+    },
+    "today.tasks.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W kolejnych wersjach pojawią się tu krótkie zadania przygotowujące do sprawdzianów."
+          }
+        }
+      }
+    },
+    "today.tasks.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan nauki już wkrótce"
+          }
+        }
+      }
+    },
+    "today.tasks.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadania na dziś"
+          }
+        }
+      }
+    },
+    "today.upcoming.empty.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj najbliższą kartkówkę albo sprawdzian, a przypomnimy Ci o nim dzień wcześniej."
+          }
+        }
+      }
+    },
+    "today.upcoming.empty.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic na horyzoncie"
+          }
+        }
+      }
+    },
+    "today.upcoming.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najbliższe terminy"
           }
         }
       }

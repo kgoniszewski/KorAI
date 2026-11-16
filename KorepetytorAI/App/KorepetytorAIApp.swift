@@ -1,6 +1,7 @@
 import Core
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 @main
 struct KorepetytorAIApp: App {
@@ -18,11 +19,12 @@ struct KorepetytorAIApp: App {
         _cloudAccount = State(initialValue: CloudAccountMonitor(
             containerIdentifier: setup.mode.cloudKitContainerIdentifier
         ))
+        UNUserNotificationCenter.current().delegate = NotificationPresenter.shared
     }
 
     var body: some Scene {
         WindowGroup {
-            AppShell()
+            RootView()
                 .modifier(DataMaintenance())
                 .environment(cloudAccount)
                 .environment(\.storeMode, persistence.mode)

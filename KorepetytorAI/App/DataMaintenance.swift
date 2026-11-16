@@ -8,8 +8,8 @@ import SwiftUI
 
 private let logger = Logger(subsystem: "KorepetytorAI", category: "DataMaintenance")
 
-/// Utrzymanie danych w tle: wgranie przedmiotów, scalanie duplikatów po synchronizacji
-/// i odświeżanie stanu konta iCloud.
+/// Utrzymanie danych w tle: wgranie przedmiotów, scalanie duplikatów przedmiotów
+/// i profili po synchronizacji, przeplanowanie przypomnień oraz odświeżanie stanu konta iCloud.
 struct DataMaintenance: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
@@ -33,15 +33,21 @@ struct DataMaintenance: ViewModifier {
         content
             .task {
                 seedSubjects()
+                mergeDuplicateProfiles()
+                await ReminderScheduler.sync(context: modelContext)
                 await cloudAccount.refresh()
             }
             .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .active {
-                    mergeDuplicateSubjects()
+                    mergeDuplicates()
+                    // Także po zmianie zgody w Ustawieniach.
+                    Task { await ReminderScheduler.sync(context: modelContext) }
                 }
             }
             .onReceive(Self.remoteChanges) { _ in
-                mergeDuplicateSubjects()
+                // Sprawdziany z innego urządzenia: przypomnienia trzeba zaplanować lub usunąć.
+                mergeDuplicates()
+                Task { await ReminderScheduler.sync(context: modelContext) }
             }
             .onReceive(Self.accountChanges) { _ in
                 Task { await cloudAccount.refresh() }
@@ -63,6 +69,28 @@ struct DataMaintenance: ViewModifier {
             logger.info("Przedmioty: dodano \(report.inserted), scalono \(report.merged).")
         } catch {
             logger.error("Wgrywanie przedmiotów nie powiodło się: \(String(describing: error), privacy: .public)")
+        }
+    }
+
+    /// Scalanie po synchronizacji: przedmioty i profile.
+    private func mergeDuplicates() {
+        mergeDuplicateSubjects()
+        mergeDuplicateProfiles()
+    }
+
+    /// Profil („jeden na konto iCloud”) mógł powstać na dwóch urządzeniach przed synchronizacją.
+    private func mergeDuplicateProfiles() {
+        do {
+            let repository = ProfileRepository(context: modelContext)
+            let merged = try repository.mergeDuplicates()
+            if modelContext.hasChanges {
+                try modelContext.save()
+            }
+            if merged > 0 {
+                logger.info("Scalono duplikaty profilu: \(merged).")
+            }
+        } catch {
+            logger.error("Scalanie profili nie powiodło się: \(String(describing: error), privacy: .public)")
         }
     }
 

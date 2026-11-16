@@ -184,4 +184,34 @@ Gdy któraś decyzja zmieni się w trakcie implementacji, zapisz to tutaj w sekc
 
 ## 14. Decyzje wykonawcze
 
-*(Uzupełniane w trakcie implementacji.)*
+Rozstrzygnięte 2026-11-16 przy implementacji M1. Wątpliwości 14.5–14.12 skonsultowane z Fable 5.2.
+
+### Otwarte decyzje z punktu 13 (zgodnie z rekomendacjami)
+
+1. **Przypomnienia na dwóch urządzeniach:** każde urządzenie planuje przypomnienia samo, z tych samych danych; przy dwóch urządzeniach przyjdą dwa powiadomienia. Ustawienie „przypominaj na tym urządzeniu” — M7.
+2. **Usuwanie przedmiotu ze sprawdzianami:** blokada z komunikatem podającym liczbę terminów (`SubjectRepositoryError.hasAssessments`). Przeniesienie terminów: na razie ręcznie, zmieniając przedmiot w edytorze terminu; automatyczne przeniesienie — później.
+3. **Godzina przypomnienia:** stała 18:00 dnia poprzedniego (`ReminderPlanner.defaultHour`), bez ustawienia.
+4. **Awatary:** 8 symboli SF Symbols na kolorach z `SubjectPalette` (`AvatarID` w `DesignSystem`): kot, pies, zając, ptak, ryba, żółw, biedronka, jaszczurka.
+
+### Decyzje podjęte w trakcie
+
+5. **Przełącznik przypomnienia bez zmiany schematu.** `Assessment` w `SchemaV1` nie ma pola na przełącznik, a zmiana `SchemaV1` w miejscu przy podanym planie migracji grozi błędem 134504 („unknown model version”) na urządzeniach z bazą M0. Przełącznik jest więc zapisany lokalnie (`ReminderPreferences`, `UserDefaults`, zbiór ID z wyłączonym przypomnieniem; domyślnie włączone). Spójne z 14.1 (planowanie per urządzenie). **Dług:** pole `reminderEnabled` wejdzie przy pierwszym `SchemaV2`. Schemat M1 nie ma żadnych nowych pól.
+6. **Treść powiadomienia** (odstępstwo od punktu 9): tytuł wg rodzaju — „Jutro: kartkówka / sprawdzian / praca klasowa / termin” — a treść to nazwa przedmiotu w mianowniku. Wzór „sprawdzian z <przedmiot>” wymagałby dopełniacza edytowalnych nazw. Zakres materiału nie trafia do powiadomienia.
+7. **Data terminu:** zapisywana jako początek dnia w kalendarzu urządzenia (`AssessmentRepository` normalizuje przy dodaniu i edycji). Przedziały dat są półotwarte `[od, do)`. „Nadchodzące” liczą się od początku dzisiejszego dnia (termin na dziś jest nadchodzący).
+8. **Domyślna data nowego terminu: za 7 dni** (punkt 8.4). Punkt 3 mówi „data = dziś” — wybrano 8.4, bo termin na dziś nie dostałby przypomnienia. Wybór dnia w widoku miesiąca podstawia ten dzień.
+9. **Nazwy przedmiotów:** odrzucana jest nazwa pusta, dłuższa niż 40 znaków i taka, która po normalizacji (`SubjectCatalog.normalizedKey`) powtarza istniejącą — inaczej `SubjectSeeder.mergeDuplicates` po cichu scaliłby przedmioty przy następnym starcie.
+10. **Ocena** jest zapisywana tylko dla stanu „zakończony”; zmiana stanu na inny czyści ją przy zapisie. Gest „zakończ” na liście nie pyta o ocenę (wpisuje się ją w edycji).
+11. **Ostatnio użyty przedmiot** jest pamiętany lokalnie (`UserDefaults`, `planner.lastSubjectID`) i używany tylko, jeśli nadal istnieje. Aktywny filtr przedmiotu w Planerze ma pierwszeństwo.
+12. **Zgoda na powiadomienia:** prośba przy pierwszym włączeniu przełącznika albo — ponieważ przełącznik jest domyślnie włączony — przy pierwszym zapisie terminu z włączonym przypomnieniem. Okno systemowe pojawia się po zamknięciu arkusza, więc nie wydłuża wpisu (cel 15 s). Bez zgody przełącznik jest wyłączony, z informacją i przyciskiem do Ustawień.
+13. **Przeplanowanie przypomnień** (`ReminderScheduler.sync`) uzgadnia oczekujące żądania z całą bazą: przy starcie, po powrocie na pierwszy plan (także po zmianie zgody w Ustawieniach), po zmianach z iCloud i po każdym zapisie, zakończeniu lub usunięciu terminu. Usuwa żądania `assessment.*` bez odpowiednika (np. termin usunięty na drugim urządzeniu). Planuje najwyżej 50 najbliższych (limit iOS to 64 oczekujące). Wyzwalacz kalendarzowy (komponenty daty), więc 18:00 zostaje 18:00 po zmianie czasu. Nakładające się wywołania stosują swoje plany po kolei, w kolejności wywołań.
+14. **Wprowadzenie** pokazuje się, gdy `@Query` profili jest puste (`RootView`), więc profil, który przyjdzie z iCloud w trakcie wprowadzenia, kończy je samo. „Gotowe” tworzy profil tylko, gdy `currentProfile()` zwraca `nil`. Profil utworzony na drugim urządzeniu przed synchronizacją przegrywa ze starszym (jego pseudonim znika) — świadomie, zgodnie z punktem 6.
+15. **Scalanie profili** zachowuje pseudonim, awatar i `dayOffTokens` profilu, który zostaje; jego puste `settingsJSON` uzupełnia z duplikatu. Pseudonim ma limit 30 znaków.
+16. **Termin bez przedmiotu** (`subject == nil`, np. gdy relacja przyjdzie z iCloud później) jest pokazywany jako „Bez przedmiotu” w szarym kolorze; nie ma kropki w kolorze przedmiotu.
+17. **Widok listy:** dziś i przyszłe dni rosnąco na górze, potem minione dni od najnowszego (nagłówek „Minione · …”). **Widok miesiąca** zawsze pokazuje siatkę; dzień bez terminów ma krótką informację i przycisk dodania terminu na ten dzień. Stan pusty z `EmptyState` jest w widoku listy. Wybrany tryb jest pamiętany lokalnie.
+18. **Profil:** z M0 usunięto przycisk przedmiotu testowego i listę przedmiotów; został stan iCloud.
+19. **Teksty** z odmianą liczebników (1 termin / 2 terminy / 5 terminów) korzystają z wariantów liczby mnogiej w String Catalog.
+
+### Znane ograniczenia (bez zmian w M1)
+
+- Przedmiot startowy usunięty lub przemianowany wraca przy pierwszym uruchomieniu na **nowej instalacji**, jeśli dane z iCloud jeszcze nie dotarły (zachowanie `SubjectSeeder` z M0, którego nie zmieniamy).
+- Przełącznik przypomnienia nie synchronizuje się między urządzeniami (14.5).
