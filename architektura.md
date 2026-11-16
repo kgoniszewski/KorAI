@@ -260,12 +260,14 @@ KorepetytorAI/
 
 ### Kryteria odbioru
 
-- [ ] Projekt buduje się bez ostrzeżeń i testy przechodzą.
-- [ ] Aplikacja uruchamia się na iPhonie 14 i na iPadzie, z właściwym układem nawigacji na każdym.
-- [ ] Po pierwszym uruchomieniu w bazie jest dokładnie 16 przedmiotów, także po uruchomieniu na drugim urządzeniu.
-- [ ] Przedmiot dodany testowo na jednym urządzeniu pojawia się na drugim (ten sam Apple ID, prawdziwe urządzenia).
-- [ ] Schemat CloudKit jest widoczny w CloudKit Console w środowisku Development.
-- [ ] Tryb ciemny i największy rozmiar tekstu nie psują układu ekranów zastępczych.
+- [x] Projekt buduje się bez ostrzeżeń i testy przechodzą.
+- [x] Aplikacja uruchamia się na iPhonie 14 i na iPadzie, z właściwym układem nawigacji na każdym.
+- [x] Po pierwszym uruchomieniu w bazie jest dokładnie 16 przedmiotów, także po uruchomieniu na drugim urządzeniu.
+- [x] Przedmiot dodany testowo na jednym urządzeniu pojawia się na drugim (ten sam Apple ID, prawdziwe urządzenia).
+- [x] Schemat CloudKit jest widoczny w CloudKit Console w środowisku Development.
+- [x] Tryb ciemny i największy rozmiar tekstu nie psują układu ekranów zastępczych.
+
+M0 zaakceptowany na urządzeniach. Specyfikacja etapu M1: [`KorepetytorAI/docs/M1-spec.md`](KorepetytorAI/docs/M1-spec.md).
 
 ### Poza zakresem M0
 
