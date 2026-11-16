@@ -268,6 +268,7 @@ KorepetytorAI/
 - [x] Tryb ciemny i największy rozmiar tekstu nie psują układu ekranów zastępczych.
 
 M0 zaakceptowany na urządzeniach. Specyfikacja etapu M1: [`KorepetytorAI/docs/M1-spec.md`](KorepetytorAI/docs/M1-spec.md).
+Specyfikacja etapu M2: [`KorepetytorAI/docs/M2-spec.md`](KorepetytorAI/docs/M2-spec.md).
 
 ### Poza zakresem M0
 
