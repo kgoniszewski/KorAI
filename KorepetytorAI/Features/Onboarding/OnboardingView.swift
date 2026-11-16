@@ -49,7 +49,7 @@ struct OnboardingView: View {
         }
         .background(Palette.background.ignoresSafeArea())
         .animation(.spring(duration: 0.35), value: step)
-        .alert("common.error", isPresented: $errorText.isPresent()) {
+        .alert("common.error", isPresented: $errorText.isPresent) {
             Button("common.ok", role: .cancel) {}
         } message: {
             Text(verbatim: errorText ?? "")

@@ -130,7 +130,7 @@ struct ProfileEditorView: View {
                         .disabled(!canSave)
                 }
             }
-            .alert("common.error", isPresented: $errorText.isPresent()) {
+            .alert("common.error", isPresented: $errorText.isPresent) {
                 Button("common.ok", role: .cancel) {}
             } message: {
                 Text(verbatim: errorText ?? "")

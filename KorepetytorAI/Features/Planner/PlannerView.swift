@@ -62,13 +62,13 @@ struct PlannerView: View {
             }
             .background(Palette.background)
             .navigationTitle("section.planner")
-            .toolbar { toolbar }
+            .toolbar { toolbarContent }
             .sheet(item: $editorTarget) { target in
                 AssessmentEditorView(target: target)
             }
             .confirmationDialog(
                 "assessment.delete.confirm",
-                isPresented: $pendingDeletion.isPresent(),
+                isPresented: $pendingDeletion.isPresent,
                 titleVisibility: .visible,
                 presenting: pendingDeletion
             ) { assessment in
@@ -77,7 +77,7 @@ struct PlannerView: View {
                 }
                 Button("common.cancel", role: .cancel) {}
             }
-            .alert("common.error", isPresented: $errorText.isPresent()) {
+            .alert("common.error", isPresented: $errorText.isPresent) {
                 Button("common.ok", role: .cancel) {}
             } message: {
                 Text(verbatim: errorText ?? "")
@@ -145,7 +145,7 @@ struct PlannerView: View {
     }
 
     @ToolbarContentBuilder
-    private var toolbar: some ToolbarContent {
+    private var toolbarContent: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             NavigationLink {
                 SubjectListView()

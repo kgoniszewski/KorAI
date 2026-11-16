@@ -32,7 +32,7 @@ enum ReminderScheduler {
     @discardableResult
     static func requestAuthorization() async -> Authorization {
         do {
-            _ = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
+            _ = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
         } catch {
             logger.error("Prośba o zgodę na powiadomienia nie powiodła się: \(String(describing: error), privacy: .public)")
         }
@@ -58,8 +58,22 @@ enum ReminderScheduler {
             return
         }
 
-        await apply(ReminderPlanner.plan(for: candidates))
+        // Wywołania `sync` mogą się nakładać (start, powrót na pierwszy plan, iCloud, zapis),
+        // a `apply` ma punkty zawieszenia. Kolejne zastosowania planu idą więc po kolei,
+        // w kolejności wywołań: starszy plan nie nadpisze nowszego (np. nie przywróci
+        // przypomnienia właśnie usuniętego sprawdzianu).
+        let plan = ReminderPlanner.plan(for: candidates)
+        let previous = pendingApply
+        let current = Task {
+            await previous?.value
+            await apply(plan)
+        }
+        pendingApply = current
+        await current.value
     }
+
+    /// Ostatnie zlecone zastosowanie planu (kolejka `sync`).
+    @MainActor private static var pendingApply: Task<Void, Never>?
 
     /// Usuwa nieaktualne żądania i dodaje (lub zastępuje) zaplanowane.
     private static func apply(_ plan: [PlannedReminder]) async {

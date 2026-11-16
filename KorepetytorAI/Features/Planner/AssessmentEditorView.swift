@@ -145,7 +145,7 @@ struct AssessmentEditorView: View {
                 Button("assessment.delete", role: .destructive, action: delete)
                 Button("common.cancel", role: .cancel) {}
             }
-            .alert("common.error", isPresented: $errorText.isPresent()) {
+            .alert("common.error", isPresented: $errorText.isPresent) {
                 Button("common.ok", role: .cancel) {}
             } message: {
                 Text(verbatim: errorText ?? "")

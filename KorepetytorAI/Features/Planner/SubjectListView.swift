@@ -40,7 +40,7 @@ struct SubjectListView: View {
         }
         .confirmationDialog(
             pendingDeletion.map { Text("subjects.delete.confirm.title \($0.name)") } ?? Text(verbatim: ""),
-            isPresented: $pendingDeletion.isPresent(),
+            isPresented: $pendingDeletion.isPresent,
             titleVisibility: .visible,
             presenting: pendingDeletion
         ) { subject in
@@ -51,14 +51,14 @@ struct SubjectListView: View {
         }
         .alert(
             blockedDeletion.map { Text("subjects.delete.blocked.title \($0.name)") } ?? Text(verbatim: ""),
-            isPresented: $blockedDeletion.isPresent(),
+            isPresented: $blockedDeletion.isPresent,
             presenting: blockedDeletion
         ) { _ in
             Button("common.ok", role: .cancel) {}
         } message: { blocked in
             Text("subjects.delete.blocked.message \(blocked.count)")
         }
-        .alert("common.error", isPresented: $errorText.isPresent()) {
+        .alert("common.error", isPresented: $errorText.isPresent) {
             Button("common.ok", role: .cancel) {}
         } message: {
             Text(verbatim: errorText ?? "")

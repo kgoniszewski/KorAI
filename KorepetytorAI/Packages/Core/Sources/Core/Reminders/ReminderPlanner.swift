@@ -150,4 +150,12 @@ public struct PlannedReminder: Equatable, Sendable {
     public let fireDate: Date
     public let kind: AssessmentKind
     public let subjectName: String?
+
+    public init(identifier: String, assessmentID: UUID, fireDate: Date, kind: AssessmentKind, subjectName: String?) {
+        self.identifier = identifier
+        self.assessmentID = assessmentID
+        self.fireDate = fireDate
+        self.kind = kind
+        self.subjectName = subjectName
+    }
 }
