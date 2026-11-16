@@ -12,6 +12,259 @@
         }
       }
     },
+    "assessment.delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń"
+          }
+        }
+      }
+    },
+    "assessment.delete.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć ten termin?"
+          }
+        }
+      }
+    },
+    "assessment.editor.chooseSubject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybierz"
+          }
+        }
+      }
+    },
+    "assessment.editor.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "assessment.editor.editTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edycja terminu"
+          }
+        }
+      }
+    },
+    "assessment.editor.gradeFooter": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocenę możesz wpisać po zakończeniu. Jest tylko dla Ciebie i nic nie zmienia."
+          }
+        }
+      }
+    },
+    "assessment.editor.gradePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocena, np. 4+ (opcjonalnie)"
+          }
+        }
+      }
+    },
+    "assessment.editor.kind": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rodzaj"
+          }
+        }
+      }
+    },
+    "assessment.editor.newTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowy termin"
+          }
+        }
+      }
+    },
+    "assessment.editor.scope": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakres (opcjonalnie)"
+          }
+        }
+      }
+    },
+    "assessment.editor.scopePlaceholder": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Np. rozdział 3, komórka roślinna"
+          }
+        }
+      }
+    },
+    "assessment.editor.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stan"
+          }
+        }
+      }
+    },
+    "assessment.editor.subject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przedmiot"
+          }
+        }
+      }
+    },
+    "assessment.gradeValue %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocena: %@"
+          }
+        }
+      }
+    },
+    "assessment.kind.classTest": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Praca klasowa"
+          }
+        }
+      }
+    },
+    "assessment.kind.other": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inne"
+          }
+        }
+      }
+    },
+    "assessment.kind.shortQuiz": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kartkówka"
+          }
+        }
+      }
+    },
+    "assessment.kind.test": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzian"
+          }
+        }
+      }
+    },
+    "assessment.markCompleted": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ"
+          }
+        }
+      }
+    },
+    "assessment.noSubject": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez przedmiotu"
+          }
+        }
+      }
+    },
+    "assessment.status.cancelled": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odwołany"
+          }
+        }
+      }
+    },
+    "assessment.status.completed": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończony"
+          }
+        }
+      }
+    },
+    "assessment.status.upcoming": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nadchodzący"
+          }
+        }
+      }
+    },
     "common.cancel": {
       "extractionState": "manual",
       "localizations": {
@@ -52,6 +305,109 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zapisz"
+          }
+        }
+      }
+    },
+    "countdown.daysAgo %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dzień temu"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dni temu"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dni temu"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld dnia temu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "countdown.inDays %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dzień"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dni"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dni"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "za %lld dnia"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "countdown.today": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dziś"
+          }
+        }
+      }
+    },
+    "countdown.tomorrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jutro"
+          }
+        }
+      }
+    },
+    "countdown.yesterday": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wczoraj"
           }
         }
       }
@@ -177,13 +533,46 @@
         }
       }
     },
+    "planner.addAssessment": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj termin"
+          }
+        }
+      }
+    },
+    "planner.empty.filtered.message %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie ma jeszcze terminów z przedmiotu „%@”."
+          }
+        }
+      }
+    },
+    "planner.empty.filtered.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak terminów"
+          }
+        }
+      }
+    },
     "planner.empty.message": {
       "extractionState": "manual",
       "localizations": {
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wkrótce dodasz tu kartkówki, sprawdziany i prace klasowe."
+            "value": "Dodaj kartkówkę, sprawdzian albo pracę klasową. Zajmie to kilka sekund."
           }
         }
       }
@@ -195,6 +584,39 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kalendarz jest jeszcze pusty"
+          }
+        }
+      }
+    },
+    "planner.filter": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filtr przedmiotu"
+          }
+        }
+      }
+    },
+    "planner.filter.all": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystkie przedmioty"
+          }
+        }
+      }
+    },
+    "planner.list.pastHeader %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minione · %@"
           }
         }
       }
